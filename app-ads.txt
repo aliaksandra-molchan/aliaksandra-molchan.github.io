@@ -2,7 +2,7 @@
 google.com, pub-8878474521961003, DIRECT, f08c47fec0942fa0
 #Facebook
 #Replace the Business ID below with your Facebook Business ID
-facebook.com, 2793675900927142, DIRECT, c3e20eee3f780d68
+facebook.com, 2793675900927142, RESELLER, c3e20eee3f780d68
 #Updated 20th December, 2022
 #Appodeal
 appodeal.com, 155412, DIRECT
