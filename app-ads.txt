@@ -5,9 +5,9 @@ google.com, pub-8878474521961003, DIRECT, f08c47fec0942fa0
 facebook.com, 2793675900927142, RESELLER, c3e20eee3f780d68
 #Updated 20th December, 2022
 #Appodeal
-appodeal.com, 155412, DIRECT
+appodeal.com, 155412, RESELLER
 #BidMachine
-bidmachine.io, 155412, DIRECT
+bidmachine.io, 155412, RESELLER
 google.com, pub-4272971530084173, DIRECT, f08c47fec0942fa0
 #Notsy
 google.com, pub-4272971530084173, RESELLER, f08c47fec0942fa0
