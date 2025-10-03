@@ -16,6 +16,8 @@ bidmachine.io, 155412, DIRECT
 
 #Yandex
 yandex.com, 98150128, DIRECT
+yandex.com, 302446435, DIRECT
+
 betweendigital.com, 43554, RESELLER
 openx.com, 541177349, RESELLER, 6a698e2ec38604c6
 pubmatic.com, 159668, RESELLER, 5d62403b186f2ace
