@@ -1,8 +1,10 @@
 #AdMob
 google.com, pub-8878474521961003, DIRECT, f08c47fec0942fa0
+google.com, pub-8335006938993484, DIRECT, f08c47fec0942fa0
 #Facebook
 #Replace the Business ID below with your Facebook Business ID
 facebook.com, 2793675900927142, DIRECT, c3e20eee3f780d68
+
 
 #Updated 21st NOVEMBER
 
