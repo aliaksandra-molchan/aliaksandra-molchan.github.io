@@ -140,7 +140,7 @@ header{
 /* Hero */
 .hero{
   display:grid;
-  grid-template-columns: 1.1fr .9fr;
+  grid-template-columns: 1fr;
   gap:24px;
   align-items:center;
   padding: 18px 0 10px;
