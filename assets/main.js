@@ -30,3 +30,36 @@ window.addEventListener("mouseleave", () => {
   if (!hero) return;
   hero.style.transform = "translate(0px, 0px)";
 });
+
+
+// ===== Simple reviews rotation (no markup change) =====
+const reviews = document.querySelectorAll('.micro-reviews .review');
+const dots = document.querySelectorAll('.reviews-dots .dot');
+
+let current = 0;
+const delay = 6000;
+
+function showReview(index){
+  reviews.forEach((r,i) => {
+    r.classList.toggle('is-active', i === index);
+  });
+
+  dots.forEach((d,i) => {
+    d.classList.toggle('is-active', i === index);
+  });
+
+  current = index;
+}
+
+// init
+showReview(0);
+
+setInterval(() => {
+  const next = (current + 1) % reviews.length;
+  showReview(next);
+}, delay);
+
+// клики по точкам
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => showReview(i));
+});
