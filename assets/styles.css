@@ -907,6 +907,316 @@
 }
 
 
+/* =============================================
+   REVIEWS CAROUSEL
+   ============================================= */
+
+.reviews-section {
+  margin-top: 50px;
+}
+
+/* Outer container — позиционирует кнопки поверх карусели */
+.carousel-outer {
+  position: relative;
+  padding: 0 52px;
+}
+
+/* Обёртка трека — обрезает горизонтально, сохраняя тени */
+.carousel-wrapper {
+  overflow-x: clip;
+  padding: 48px 0 40px;
+}
+
+/* Трек — контейнер для карточек */
+.carousel-track {
+  position: relative;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Карточка отзыва ── */
+.r-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 340px;
+  max-width: calc(100vw - 130px);
+  display: flex;
+  flex-direction: column;
+
+  background: linear-gradient(160deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.08) 100%);
+  border: 1px solid rgba(255,255,255,.20);
+  border-radius: 26px;
+  padding: 26px 24px 22px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.20);
+  overflow: hidden;
+
+  transition:
+    transform 0.60s cubic-bezier(0.34, 1.10, 0.64, 1),
+    opacity   0.55s ease,
+    box-shadow 0.55s ease,
+    filter    0.55s ease;
+
+  will-change: transform, opacity, filter;
+  cursor: default;
+  user-select: none;
+}
+
+/* Внутренний блик */
+.r-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 22% 12%, rgba(255,255,255,.22) 0%, transparent 58%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Декоративная кавычка */
+.r-card::after {
+  content: "\201C";
+  position: absolute;
+  top: -4px;
+  right: 14px;
+  font-size: 110px;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(255,255,255,.07);
+  pointer-events: none;
+}
+
+/* ── Позиции карточек (data-offset устанавливается JS) ── */
+
+/* Центральная — активная */
+.r-card[data-offset="0"] {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  z-index: 5;
+  box-shadow:
+    0 32px 80px rgba(0,0,0,.28),
+    0 0 0 1px rgba(255,255,255,.28),
+    0 0 50px rgba(255,255,255,.07);
+  filter: blur(0);
+}
+
+/* ±1 */
+.r-card[data-offset="1"] {
+  transform: translate(calc(-50% + 310px), -50%) scale(0.83);
+  opacity: 0.52;
+  z-index: 3;
+  filter: blur(0.6px);
+}
+.r-card[data-offset="-1"] {
+  transform: translate(calc(-50% - 310px), -50%) scale(0.83);
+  opacity: 0.52;
+  z-index: 3;
+  filter: blur(0.6px);
+}
+
+/* ±2 */
+.r-card[data-offset="2"] {
+  transform: translate(calc(-50% + 560px), -50%) scale(0.68);
+  opacity: 0.26;
+  z-index: 1;
+  filter: blur(1.5px);
+}
+.r-card[data-offset="-2"] {
+  transform: translate(calc(-50% - 560px), -50%) scale(0.68);
+  opacity: 0.26;
+  z-index: 1;
+  filter: blur(1.5px);
+}
+
+/* Скрытые (вне диапазона -2..+2) */
+.r-card:not([data-offset="0"]):not([data-offset="1"]):not([data-offset="-1"]):not([data-offset="2"]):not([data-offset="-2"]) {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.55);
+}
+
+/* ── Содержимое карточки ── */
+
+.r-stars {
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: #FFD055;
+  margin-bottom: 12px;
+  text-shadow: 0 0 12px rgba(255, 208, 85, .45);
+}
+
+.r-text {
+  margin: 0 0 18px;
+  font-size: 13.5px;
+  line-height: 1.58;
+  color: rgba(255,255,255,.87);
+  flex: 1;
+}
+
+.r-author {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  margin-top: auto;
+}
+
+.r-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  flex: 0 0 auto;
+  border: 1.5px solid rgba(255,255,255,.28);
+  box-shadow: 0 4px 12px rgba(0,0,0,.18);
+}
+
+.r-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.r-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,.92);
+}
+
+.r-app {
+  font-size: 12px;
+  color: rgba(255,255,255,.55);
+}
+
+/* ── Кнопки навигации ── */
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.90);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(12px);
+  z-index: 10;
+  transition:
+    transform .20s cubic-bezier(0.34, 1.4, 0.64, 1),
+    background .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
+}
+
+.carousel-btn:hover {
+  background: rgba(255,255,255,.22);
+  border-color: rgba(255,255,255,.40);
+  transform: translateY(-50%) scale(1.10);
+  box-shadow: 0 8px 24px rgba(0,0,0,.22);
+}
+
+.carousel-btn:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.carousel-prev { left: 0; }
+.carousel-next { right: 0; }
+
+/* ── Индикаторные точки ── */
+
+.carousel-dots-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 26px;
+}
+
+.cdot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,.28);
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  transition: width .30s cubic-bezier(0.34, 1.2, 0.64, 1), background .25s ease;
+}
+
+.cdot.cdot-active {
+  width: 26px;
+  background: rgba(255,255,255,.50);
+}
+
+/* Прогресс-заливка активной точки */
+.cdot.cdot-active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,.90);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: cdotFill 4000ms linear forwards;
+}
+
+@keyframes cdotFill {
+  to { transform: scaleX(1); }
+}
+
+/* ── Адаптив ── */
+
+@media (max-width: 860px) {
+  .carousel-outer { padding: 0 46px; }
+
+  .r-card[data-offset="1"] {
+    transform: translate(calc(-50% + 260px), -50%) scale(0.82);
+    opacity: 0.45;
+  }
+  .r-card[data-offset="-1"] {
+    transform: translate(calc(-50% - 260px), -50%) scale(0.82);
+    opacity: 0.45;
+  }
+  .r-card[data-offset="2"],
+  .r-card[data-offset="-2"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .carousel-outer { padding: 0 40px; }
+  .carousel-wrapper { padding: 36px 0 28px; }
+  .carousel-track { height: 270px; }
+
+  .r-card {
+    width: calc(100vw - 100px);
+    max-width: 320px;
+    padding: 22px 18px 18px;
+  }
+
+  .r-card[data-offset="1"] {
+    transform: translate(calc(-50% + 200px), -50%) scale(0.80);
+    opacity: 0.35;
+  }
+  .r-card[data-offset="-1"] {
+    transform: translate(calc(-50% - 200px), -50%) scale(0.80);
+    opacity: 0.35;
+  }
+
+  .carousel-btn { width: 38px; height: 38px; }
+}
+
 .policy {
   max-width: 900px;      /* комфортная ширина для чтения */
   margin: 0 auto;          /* центрирование */

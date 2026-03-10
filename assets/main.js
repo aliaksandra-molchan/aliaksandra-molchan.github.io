@@ -121,3 +121,88 @@ function initReviewSlider(root) {
 
 // инициализируем все блоки с отзывами на странице
 document.querySelectorAll('.micro-reviews').forEach(initReviewSlider);
+
+// ===== Reviews Carousel (3D-style, 5 cards) =====
+function initReviewsCarousel() {
+  const track = document.getElementById('reviewsCarousel');
+  if (!track) return;
+
+  const cards = [...track.querySelectorAll('.r-card')];
+  const dots  = [...document.querySelectorAll('.carousel-dots-row .cdot')];
+  const total = cards.length;
+  let active = 0;
+  let timer  = null;
+  const DELAY = 4000;
+
+  function goTo(index) {
+    active = ((index % total) + total) % total;
+
+    cards.forEach((card, i) => {
+      let offset = i - active;
+      // нормализуем offset в диапазон [-floor(n/2), floor(n/2)]
+      if (offset >  Math.floor(total / 2)) offset -= total;
+      if (offset < -Math.floor(total / 2)) offset += total;
+      card.dataset.offset = offset;
+    });
+
+    dots.forEach((dot, i) => {
+      const isActive = i === active;
+      // сброс и перезапуск анимации прогресса
+      dot.classList.remove('cdot-active');
+      void dot.offsetWidth; // reflow
+      if (isActive) dot.classList.add('cdot-active');
+    });
+  }
+
+  function next() { goTo(active + 1); }
+  function prev() { goTo(active - 1); }
+
+  function startTimer() {
+    stopTimer();
+    timer = setInterval(next, DELAY);
+  }
+
+  function stopTimer() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+
+  // Кнопки со стрелками
+  document.querySelector('.carousel-prev')
+    ?.addEventListener('click', () => { prev(); startTimer(); });
+  document.querySelector('.carousel-next')
+    ?.addEventListener('click', () => { next(); startTimer(); });
+
+  // Точки-индикаторы
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => { goTo(i); startTimer(); });
+  });
+
+  // Пауза при наведении (удобно читать)
+  track.addEventListener('mouseenter', stopTimer);
+  track.addEventListener('mouseleave', startTimer);
+
+  // Свайп на тачскринах
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) {
+      dx < 0 ? next() : prev();
+      startTimer();
+    }
+  }, { passive: true });
+
+  // Клик по боковым карточкам — переход к ней
+  cards.forEach((card, i) => {
+    card.addEventListener('click', () => {
+      if (i !== active) { goTo(i); startTimer(); }
+    });
+  });
+
+  goTo(0);
+  startTimer();
+}
+
+initReviewsCarousel();
