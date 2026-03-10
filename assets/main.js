@@ -132,17 +132,29 @@ function initReviewsCarousel() {
   const total = cards.length;
   let active = 0;
   let timer  = null;
-  const DELAY = 4000;
+  const DELAY = 3000;
 
   function goTo(index) {
     active = ((index % total) + total) % total;
 
     cards.forEach((card, i) => {
-      let offset = i - active;
+      let newOffset = i - active;
       // нормализуем offset в диапазон [-floor(n/2), floor(n/2)]
-      if (offset >  Math.floor(total / 2)) offset -= total;
-      if (offset < -Math.floor(total / 2)) offset += total;
-      card.dataset.offset = offset;
+      if (newOffset >  Math.floor(total / 2)) newOffset -= total;
+      if (newOffset < -Math.floor(total / 2)) newOffset += total;
+
+      const oldOffset = parseInt(card.dataset.offset ?? '99');
+      const jump = Math.abs(newOffset - oldOffset);
+
+      if (jump > 2) {
+        // Карточка "телепортируется" — убираем анимацию, чтобы не скакала через экран
+        card.style.transition = 'none';
+        card.dataset.offset = newOffset;
+        void card.offsetWidth; // reflow
+        requestAnimationFrame(() => { card.style.transition = ''; });
+      } else {
+        card.dataset.offset = newOffset;
+      }
     });
 
     dots.forEach((dot, i) => {

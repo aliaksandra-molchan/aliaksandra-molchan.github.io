@@ -921,10 +921,9 @@
   padding: 0 52px;
 }
 
-/* Обёртка трека — обрезает горизонтально, сохраняя тени */
+/* Обёртка трека — без маски, тени не обрезаются */
 .carousel-wrapper {
-  overflow-x: clip;
-  padding: 48px 0 40px;
+  padding: 48px 0 90px;
 }
 
 /* Трек — контейнер для карточек */
@@ -1015,18 +1014,12 @@
   filter: blur(0.6px);
 }
 
-/* ±2 */
-.r-card[data-offset="2"] {
-  transform: translate(calc(-50% + 560px), -50%) scale(0.68);
-  opacity: 0.26;
-  z-index: 1;
-  filter: blur(1.5px);
-}
+/* ±2 — скрыты, чтобы не выходить за пределы контейнера */
+.r-card[data-offset="2"],
 .r-card[data-offset="-2"] {
-  transform: translate(calc(-50% - 560px), -50%) scale(0.68);
-  opacity: 0.26;
-  z-index: 1;
-  filter: blur(1.5px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.65);
 }
 
 /* Скрытые (вне диапазона -2..+2) */
@@ -1138,7 +1131,9 @@
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 26px;
+  margin-top: -58px; /* подтягиваем в область тени карточки */
+  position: relative;
+  z-index: 6; /* выше карточек, ниже кнопок */
 }
 
 .cdot {
@@ -1167,7 +1162,7 @@
   background: rgba(255,255,255,.90);
   transform: scaleX(0);
   transform-origin: left;
-  animation: cdotFill 4000ms linear forwards;
+  animation: cdotFill 3000ms linear forwards;
 }
 
 @keyframes cdotFill {
