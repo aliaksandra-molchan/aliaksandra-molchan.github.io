@@ -459,14 +459,25 @@
   
   /* Reveal animations */
   .reveal{
-    opacity:0;
-    transform: translateY(14px);
-    transition: opacity .6s ease, transform .6s ease;
+    opacity: 0;
     will-change: opacity, transform;
+    transition:
+      opacity  0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
   }
+  /* default: slide up */
+  .reveal:not([data-reveal]),
+  .reveal[data-reveal="up"] {
+    transform: translateY(36px);
+  }
+  .reveal[data-reveal="left"]  { transform: translateX(-36px); }
+  .reveal[data-reveal="right"] { transform: translateX(36px); }
+  .reveal[data-reveal="scale"] { transform: scale(0.93) translateY(18px); }
+  .reveal[data-reveal="fade"]  { transform: none; }
+
   .reveal.show{
-    opacity:1;
-    transform: translateY(0);
+    opacity: 1;
+    transform: none;
   }
   
   /* -------------------------------------------------------

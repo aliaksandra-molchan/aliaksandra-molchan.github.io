@@ -2,13 +2,26 @@
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // Reveal-on-scroll animation
-const els = document.querySelectorAll(".reveal");
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (e.isIntersecting) e.target.classList.add("show");
+(function initReveal() {
+  // Auto-assign staggered delays to .reveal children of [data-stagger] containers
+  document.querySelectorAll('[data-stagger]').forEach(parent => {
+    parent.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 90}ms`;
+    });
   });
-}, { threshold: 0.12 });
-els.forEach(el => io.observe(el));
+
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('show');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  els.forEach(el => io.observe(el));
+})();
 
 // Lightweight parallax for hero image (nice but subtle)
 const hero = document.getElementById("heroMedia");
