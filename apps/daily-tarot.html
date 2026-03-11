@@ -51,6 +51,21 @@
         .blob.b1 { background: radial-gradient(ellipse, rgba(122,85,255,.45) 0%, transparent 70%); }
         .blob.b2 { background: radial-gradient(ellipse, rgba(180,60,140,.35) 0%, transparent 70%); }
 
+        /* CTA button — purple to match tarot theme, white icon fits naturally */
+        .ap-cta {
+            background: linear-gradient(135deg, rgba(122,85,255,.95), rgba(160,60,140,.9));
+            color: #fff;
+            border-color: rgba(180,130,255,.5);
+            box-shadow: 0 6px 24px rgba(100,50,200,.35);
+        }
+        .ap-cta:hover {
+            background: linear-gradient(135deg, rgba(140,100,255,.98), rgba(175,70,155,.95));
+            filter: none;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(100,50,200,.45);
+        }
+        .ap-cta svg { color: #fff; }
+
         .ap-hero {
             background: linear-gradient(145deg, rgba(122,85,255,.18), rgba(30,11,66,.6));
             border-color: rgba(180,130,255,.3);
@@ -191,21 +206,232 @@
            COHESION — unified tarot palette across all sections
            ══════════════════════════════════════════════ */
 
-        /* Feature cards → tarot purple */
+        /* Feature cards → tarot palette + overflow for visual bleed */
         .ap-feature {
             background: linear-gradient(160deg, rgba(52,16,96,.6), rgba(26,8,58,.55));
             border-color: rgba(140,90,220,.25);
+            overflow: hidden;
+            padding: 0;
         }
         .ap-feature:hover {
-            background: linear-gradient(160deg, rgba(72,26,126,.65), rgba(36,11,78,.6));
             border-color: rgba(165,115,245,.4);
             transform: translateY(-4px);
         }
 
-        /* Review cards → tarot purple */
+        /* Visual header — illustration zone */
+        .ap-feat-visual {
+            height: 118px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Subtle crosshatch pattern overlay */
+        .ap-feat-visual::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient( 45deg, transparent, transparent 9px, rgba(255,255,255,.04) 9px, rgba(255,255,255,.04) 10px),
+                repeating-linear-gradient(-45deg, transparent, transparent 9px, rgba(255,255,255,.04) 9px, rgba(255,255,255,.04) 10px);
+        }
+        /* Shimmer line at bottom of visual */
+        .ap-feat-visual::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+        }
+        /* Roman numeral */
+        .ap-feat-num {
+            position: absolute;
+            top: 10px;
+            right: 13px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,.18);
+            font-family: Georgia, serif;
+        }
+        /* Large glyph */
+        .ap-feat-glyph {
+            font-size: 44px;
+            line-height: 1;
+            filter: drop-shadow(0 0 16px currentColor);
+            transition: transform .3s ease, filter .3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .ap-feature:hover .ap-feat-glyph {
+            transform: scale(1.22) translateY(-4px);
+            filter: drop-shadow(0 0 28px currentColor);
+        }
+        /* ── Feature strip (vertical stacked layout) ── */
+        .ap-feat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .ap-feat-strip {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid rgba(140,90,220,.25);
+            background: linear-gradient(160deg, rgba(52,16,96,.58), rgba(26,8,58,.52));
+            min-height: 148px;
+            transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+        }
+        .ap-feat-strip:hover {
+            transform: translateX(5px);
+            border-color: rgba(165,115,245,.42);
+            box-shadow: 0 8px 32px rgba(0,0,0,.3);
+        }
+        /* Even strips: flip visual to right */
+        .ap-feat-strip:nth-child(even) {
+            grid-template-columns: 1fr 220px;
+        }
+        .ap-feat-strip:nth-child(even) .ap-feat-strip-vis {
+            order: 2;
+        }
+        .ap-feat-strip:nth-child(even):hover {
+            transform: translateX(-5px);
+        }
+
+        .ap-feat-strip-vis {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        /* crosshatch */
+        .ap-feat-strip-vis::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient( 45deg, transparent, transparent 9px, rgba(255,255,255,.04) 9px, rgba(255,255,255,.04) 10px),
+                repeating-linear-gradient(-45deg, transparent, transparent 9px, rgba(255,255,255,.04) 9px, rgba(255,255,255,.04) 10px);
+        }
+        /* vertical separator line */
+        .ap-feat-strip-vis::after {
+            content: "";
+            position: absolute;
+            right: 0; top: 20px; bottom: 20px;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(180,130,255,.3), transparent);
+        }
+        .ap-feat-strip:nth-child(even) .ap-feat-strip-vis::after {
+            right: auto; left: 0;
+        }
+
+        .ap-feat-strip .ap-feat-glyph {
+            font-size: 52px;
+        }
+        .ap-feat-strip:hover .ap-feat-glyph {
+            transform: scale(1.18) translateY(-3px);
+            filter: drop-shadow(0 0 28px currentColor);
+        }
+
+        .ap-feat-strip-body {
+            padding: 28px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+        }
+        /* Grid cards: restore padding (card itself has padding:0 for visual bleed) */
+        .ap-features-grid .ap-feat-title {
+            padding: 16px 20px 0;
+        }
+        .ap-features-grid .ap-feat-body {
+            padding: 6px 20px 20px;
+        }
+
+        .ap-feat-strip-body .ap-feat-title {
+            font-size: 17px;
+        }
+
+        /* ── Review cards — alive ── */
         .ap-review {
             background: linear-gradient(160deg, rgba(40,12,80,.58), rgba(20,7,50,.5));
             border-color: rgba(140,90,220,.22);
+            position: relative;
+            overflow: hidden;
+            transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+        }
+
+        /* Large decorative background quote mark */
+        .ap-review::before {
+            content: "\201C";
+            position: absolute;
+            top: -18px;
+            right: 14px;
+            font-size: 140px;
+            line-height: 1;
+            color: rgba(180,130,255,.07);
+            font-family: Georgia, serif;
+            pointer-events: none;
+        }
+
+        /* Per-card top accent line */
+        .ap-review:nth-child(1)::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, rgba(224,75,122,.75), rgba(123,92,255,.4), transparent);
+        }
+        .ap-review:nth-child(2)::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, rgba(200,75,158,.75), rgba(224,75,122,.4), transparent);
+        }
+        .ap-review:nth-child(3)::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, rgba(123,92,255,.75), rgba(74,127,160,.4), transparent);
+        }
+
+        /* Keep children above pseudo-elements */
+        .ap-review > * { position: relative; z-index: 1; }
+
+        /* Bigger glowing stars */
+        .ap-review-stars {
+            font-size: 18px !important;
+            letter-spacing: 3px;
+            filter: drop-shadow(0 0 6px rgba(255,208,96,.4));
+        }
+
+        /* Italic quote text */
+        .ap-review-text {
+            font-size: 15px !important;
+            font-style: italic;
+            color: rgba(255,255,255,.86) !important;
+            line-height: 1.68 !important;
+        }
+
+        /* Bigger avatar with glow ring */
+        .ap-review-avatar {
+            width: 42px !important;
+            height: 42px !important;
+            font-size: 16px !important;
+            box-shadow: 0 0 0 2px rgba(255,255,255,.15), 0 4px 14px rgba(0,0,0,.35);
+        }
+
+        .ap-review:hover {
+            transform: translateY(-5px);
+            border-color: rgba(165,115,245,.42);
+            box-shadow: 0 16px 44px rgba(0,0,0,.32);
+        }
+        .ap-review:hover .ap-review-stars {
+            filter: drop-shadow(0 0 12px rgba(255,208,96,.7));
         }
 
         /* Download CTA → richer purple gradient */
@@ -321,7 +547,24 @@
             50%       { opacity: 0.3; }
         }
 
-        /* Hide on narrow screens where it clutters */
+        /* Strips: stack on mobile */
+        @media (max-width: 600px) {
+            .ap-feat-strip,
+            .ap-feat-strip:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+            .ap-feat-strip-vis {
+                height: 100px;
+                order: 0 !important;
+            }
+            .ap-feat-strip:nth-child(even) .ap-feat-strip-vis::after {
+                right: 0; left: auto;
+                top: auto; bottom: 0;
+                width: auto; height: 1px;
+            }
+        }
+
+        /* Hide ornament on narrow screens */
         @media (max-width: 600px) {
             .page-ornament { display: none; }
         }
@@ -374,10 +617,10 @@
                     href="https://play.google.com/store/apps/details?id=com.noksdevelopment.dailytarot&utm_source=noks_website&utm_medium=app_page&utm_campaign=daily_tarot"
                     target="_blank" rel="noopener">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:0 0 auto">
-                        <path d="M3.6 3.2c-.4.3-.6.8-.6 1.4v14.8c0 .6.2 1.1.6 1.4l.1.1 8.3-8.3v-.2L3.6 3.2z" fill="rgba(255,255,255,.9)" />
-                        <path d="M15 14.5l-2.8-2.8v-.2l2.8-2.8.1.1 3.3 1.9c.9.5.9 1.4 0 2l-3.3 1.9-.1-.1z" fill="rgba(255,255,255,.9)" />
-                        <path d="M15.1 14.4L12 11.3 3.6 19.7c.3.3.8.4 1.4.1l10.1-5.4" fill="rgba(255,255,255,.9)" />
-                        <path d="M15.1 8.2L5 2.8c-.6-.3-1.1-.2-1.4.1L12 11.3l3.1-3.1z" fill="rgba(255,255,255,.9)" />
+                        <path d="M3.6 3.2c-.4.3-.6.8-.6 1.4v14.8c0 .6.2 1.1.6 1.4l.1.1 8.3-8.3v-.2L3.6 3.2z" fill="currentColor" />
+                        <path d="M15 14.5l-2.8-2.8v-.2l2.8-2.8.1.1 3.3 1.9c.9.5.9 1.4 0 2l-3.3 1.9-.1-.1z" fill="currentColor" />
+                        <path d="M15.1 14.4L12 11.3 3.6 19.7c.3.3.8.4 1.4.1l10.1-5.4" fill="currentColor" />
+                        <path d="M15.1 8.2L5 2.8c-.6-.3-1.1-.2-1.4.1L12 11.3l3.1-3.1z" fill="currentColor" />
                     </svg>
                     Get it on Google Play
                 </a>
@@ -534,24 +777,79 @@
             </div>
             <div class="ap-features-grid" data-stagger>
                 <div class="ap-feature reveal">
-                    <div class="ap-feat-icon" style="background: linear-gradient(135deg, rgba(122,85,255,.55), rgba(180,130,255,.35))">✦</div>
+                    <div class="ap-feat-visual" style="background: linear-gradient(155deg, rgba(88,30,158,.8), rgba(32,8,78,.75))">
+                        <span class="ap-feat-num">I</span>
+                        <div class="ap-feat-glyph" style="color: rgba(190,145,255,.95)">☽</div>
+                    </div>
                     <div class="ap-feat-title">Daily Card</div>
                     <div class="ap-feat-body">Pull one card each morning for a gentle intention or reflection to carry through your day.</div>
                 </div>
                 <div class="ap-feature reveal">
-                    <div class="ap-feat-icon" style="background: linear-gradient(135deg, rgba(224,75,122,.55), rgba(255,140,180,.35))">⊞</div>
+                    <div class="ap-feat-visual" style="background: linear-gradient(155deg, rgba(170,35,105,.78), rgba(75,8,65,.75))">
+                        <span class="ap-feat-num">II</span>
+                        <div class="ap-feat-glyph" style="color: rgba(255,130,190,.95)">✦</div>
+                    </div>
                     <div class="ap-feat-title">Multiple Spreads</div>
                     <div class="ap-feat-body">From a simple 3-card past-present-future to more complex layouts — with clear explanations for each position.</div>
                 </div>
                 <div class="ap-feature reveal">
-                    <div class="ap-feat-icon" style="background: linear-gradient(135deg, rgba(60,170,255,.55), rgba(120,210,255,.35))">◎</div>
+                    <div class="ap-feat-visual" style="background: linear-gradient(155deg, rgba(25,75,185,.78), rgba(10,30,115,.75))">
+                        <span class="ap-feat-num">III</span>
+                        <div class="ap-feat-glyph" style="color: rgba(110,190,255,.95)">◎</div>
+                    </div>
                     <div class="ap-feat-title">Card Meanings</div>
                     <div class="ap-feat-body">Detailed interpretations for all 78 cards — upright and reversed — so you always understand what you're reading.</div>
                 </div>
                 <div class="ap-feature reveal">
-                    <div class="ap-feat-icon" style="background: linear-gradient(135deg, rgba(255,160,60,.55), rgba(255,210,120,.35))">♡</div>
+                    <div class="ap-feat-visual" style="background: linear-gradient(155deg, rgba(145,85,10,.78), rgba(65,30,5,.75))">
+                        <span class="ap-feat-num">IV</span>
+                        <div class="ap-feat-glyph" style="color: rgba(255,208,96,.95)">✧</div>
+                    </div>
                     <div class="ap-feat-title">Beautiful Design</div>
                     <div class="ap-feat-body">A calm, minimal interface that makes reading feel like a ritual — not a chore. No ads cluttering the experience.</div>
+                </div>
+            </div>
+
+            <div class="ap-feat-list" data-stagger>
+                <div class="ap-feat-strip reveal">
+                    <div class="ap-feat-strip-vis" style="background: linear-gradient(155deg, rgba(88,30,158,.85), rgba(32,8,78,.8))">
+                        <span class="ap-feat-num">I</span>
+                        <div class="ap-feat-glyph" style="color: rgba(190,145,255,.95)">☽</div>
+                    </div>
+                    <div class="ap-feat-strip-body">
+                        <div class="ap-feat-title">Daily Card</div>
+                        <div class="ap-feat-body">Pull one card each morning for a gentle intention or reflection to carry through your day.</div>
+                    </div>
+                </div>
+                <div class="ap-feat-strip reveal">
+                    <div class="ap-feat-strip-vis" style="background: linear-gradient(155deg, rgba(170,35,105,.82), rgba(75,8,65,.8))">
+                        <span class="ap-feat-num">II</span>
+                        <div class="ap-feat-glyph" style="color: rgba(255,130,190,.95)">✦</div>
+                    </div>
+                    <div class="ap-feat-strip-body">
+                        <div class="ap-feat-title">Multiple Spreads</div>
+                        <div class="ap-feat-body">From a simple 3-card past-present-future to more complex layouts — with clear explanations for each position.</div>
+                    </div>
+                </div>
+                <div class="ap-feat-strip reveal">
+                    <div class="ap-feat-strip-vis" style="background: linear-gradient(155deg, rgba(25,75,185,.82), rgba(10,30,115,.8))">
+                        <span class="ap-feat-num">III</span>
+                        <div class="ap-feat-glyph" style="color: rgba(110,190,255,.95)">◎</div>
+                    </div>
+                    <div class="ap-feat-strip-body">
+                        <div class="ap-feat-title">Card Meanings</div>
+                        <div class="ap-feat-body">Detailed interpretations for all 78 cards — upright and reversed — so you always understand what you're reading.</div>
+                    </div>
+                </div>
+                <div class="ap-feat-strip reveal">
+                    <div class="ap-feat-strip-vis" style="background: linear-gradient(155deg, rgba(145,85,10,.82), rgba(65,30,5,.8))">
+                        <span class="ap-feat-num">IV</span>
+                        <div class="ap-feat-glyph" style="color: rgba(255,208,96,.95)">✧</div>
+                    </div>
+                    <div class="ap-feat-strip-body">
+                        <div class="ap-feat-title">Beautiful Design</div>
+                        <div class="ap-feat-body">A calm, minimal interface that makes reading feel like a ritual — not a chore. No ads cluttering the experience.</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -600,10 +898,10 @@
                 href="https://play.google.com/store/apps/details?id=com.noksdevelopment.dailytarot&utm_source=noks_website&utm_medium=app_page_bottom&utm_campaign=daily_tarot"
                 target="_blank" rel="noopener">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:0 0 auto">
-                    <path d="M3.6 3.2c-.4.3-.6.8-.6 1.4v14.8c0 .6.2 1.1.6 1.4l.1.1 8.3-8.3v-.2L3.6 3.2z" fill="rgba(255,255,255,.9)" />
-                    <path d="M15 14.5l-2.8-2.8v-.2l2.8-2.8.1.1 3.3 1.9c.9.5.9 1.4 0 2l-3.3 1.9-.1-.1z" fill="rgba(255,255,255,.9)" />
-                    <path d="M15.1 14.4L12 11.3 3.6 19.7c.3.3.8.4 1.4.1l10.1-5.4" fill="rgba(255,255,255,.9)" />
-                    <path d="M15.1 8.2L5 2.8c-.6-.3-1.1-.2-1.4.1L12 11.3l3.1-3.1z" fill="rgba(255,255,255,.9)" />
+                    <path d="M3.6 3.2c-.4.3-.6.8-.6 1.4v14.8c0 .6.2 1.1.6 1.4l.1.1 8.3-8.3v-.2L3.6 3.2z" fill="currentColor" />
+                    <path d="M15 14.5l-2.8-2.8v-.2l2.8-2.8.1.1 3.3 1.9c.9.5.9 1.4 0 2l-3.3 1.9-.1-.1z" fill="currentColor" />
+                    <path d="M15.1 14.4L12 11.3 3.6 19.7c.3.3.8.4 1.4.1l10.1-5.4" fill="currentColor" />
+                    <path d="M15.1 8.2L5 2.8c-.6-.3-1.1-.2-1.4.1L12 11.3l3.1-3.1z" fill="currentColor" />
                 </svg>
                 Get it on Google Play
             </a>
