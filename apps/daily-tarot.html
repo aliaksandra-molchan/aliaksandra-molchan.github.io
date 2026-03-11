@@ -54,6 +54,8 @@
         .ap-hero {
             background: linear-gradient(145deg, rgba(122,85,255,.18), rgba(30,11,66,.6));
             border-color: rgba(180,130,255,.3);
+            grid-template-columns: 140px 1fr 260px;
+            align-items: center;
         }
 
         .ap-hero::after {
@@ -62,19 +64,128 @@
             top: 20px;
             right: 28px;
             font-size: 18px;
-            color: rgba(255,208,96,.35);
+            color: rgba(255,208,96,.3);
             pointer-events: none;
         }
 
-        /* golden star accent scattered */
-        .tarot-stars {
+        /* ── Hero visual: floating tarot cards ── */
+        .ap-hero-visual {
+            position: relative;
+            height: 220px;
             display: flex;
-            gap: 10px;
             align-items: center;
-            color: rgba(255,208,96,.4);
-            font-size: 13px;
-            letter-spacing: 6px;
-            margin-bottom: 10px;
+            justify-content: center;
+        }
+
+        /* ambient glow behind cards */
+        .hv-glow {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(122,85,255,.28) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Float wrappers — handle vertical movement only */
+        @keyframes hv-float {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-14px); }
+        }
+
+        .hv-float {
+            position: absolute;
+            animation: hv-float 5.5s ease-in-out infinite;
+        }
+        .hv-f1 { animation-delay: 0s; }
+        .hv-f2 { animation-delay: -1.8s; }
+        .hv-f3 { animation-delay: -3.6s; }
+
+        /* Card base */
+        .hv-card {
+            width: 88px;
+            height: 142px;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 18px 48px rgba(0,0,0,.6), 0 4px 12px rgba(0,0,0,.4);
+        }
+
+        /* inner border ornament */
+        .hv-card::before {
+            content: "";
+            position: absolute;
+            inset: 6px;
+            border-radius: 9px;
+            border: 1px solid rgba(255,255,255,.12);
+            pointer-events: none;
+        }
+
+        /* Card fan positions & colors */
+        .hv-c1 {
+            background: linear-gradient(160deg, #140834, #2a0d60);
+            border: 1px solid rgba(180,130,255,.5);
+            transform: rotate(-16deg) translate(-50px, 10px);
+            z-index: 1;
+        }
+        .hv-c2 {
+            background: linear-gradient(160deg, #1a0b40, #38177a);
+            border: 1px solid rgba(255,208,96,.5);
+            transform: rotate(3deg) translateY(-8px);
+            z-index: 3;
+        }
+        .hv-c3 {
+            background: linear-gradient(160deg, #20083c, #461570);
+            border: 1px solid rgba(200,100,220,.5);
+            transform: rotate(16deg) translate(50px, 6px);
+            z-index: 2;
+        }
+
+        /* Symbols */
+        .hv-symbol {
+            font-size: 30px;
+            line-height: 1;
+        }
+        .hv-c1 .hv-symbol { color: rgba(180,130,255,.95); filter: drop-shadow(0 0 10px rgba(180,130,255,.7)); }
+        .hv-c2 .hv-symbol { color: #FFD060;               filter: drop-shadow(0 0 12px rgba(255,208,96,.8)); }
+        .hv-c3 .hv-symbol { color: rgba(220,130,255,.95); filter: drop-shadow(0 0 10px rgba(200,80,255,.65)); }
+
+        .hv-name {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.45);
+        }
+
+        /* Tiny sparkles */
+        @keyframes hv-spark {
+            0%, 100% { opacity: .15; transform: scale(.9); }
+            50%       { opacity: .8;  transform: scale(1.2); }
+        }
+
+        .hv-spark {
+            position: absolute;
+            pointer-events: none;
+            animation: hv-spark 3.2s ease-in-out infinite;
+        }
+        .hv-spark.s1 { top: 10%;  left: 4%;   font-size: 11px; color: #FFD060;              animation-delay: 0s; }
+        .hv-spark.s2 { top: 22%;  right: 6%;  font-size: 7px;  color: rgba(180,130,255,.9); animation-delay: -.9s; }
+        .hv-spark.s3 { bottom: 18%; left: 10%; font-size: 9px;  color: #FFD060;              animation-delay: -1.8s; }
+        .hv-spark.s4 { bottom: 28%; right: 4%; font-size: 6px;  color: rgba(220,160,255,.8); animation-delay: -2.7s; }
+
+        /* Hide visual on narrow screens */
+        @media (max-width: 900px) {
+            .ap-hero { grid-template-columns: 140px 1fr !important; }
+            .ap-hero-visual { display: none; }
+        }
+        @media (max-width: 560px) {
+            .ap-hero { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -107,7 +218,6 @@
                 <img src="https://play-lh.googleusercontent.com/IqECM4U8X0Y88V0mk6r08UomMa3ugB108qfTREu8RhCHYQu3W3uheyWqx96kErUZgQ=w480-h960-rw" alt="Daily Tarot app icon">
             </div>
             <div class="ap-hero-body">
-                <div class="tarot-stars">✦ ✦ ✦</div>
                 <div class="kicker"><span class="dot"></span>Lifestyle &nbsp;·&nbsp; Free</div>
                 <h1 class="ap-title">Daily Tarot</h1>
                 <p class="ap-tagline">Gentle card readings and calm reflections — every single day.</p>
@@ -127,6 +237,37 @@
                     </svg>
                     Get it on Google Play
                 </a>
+            </div>
+
+            <!-- Animated tarot cards visual -->
+            <div class="ap-hero-visual" aria-hidden="true">
+                <div class="hv-glow"></div>
+
+                <div class="hv-float hv-f1">
+                    <div class="hv-card hv-c1">
+                        <div class="hv-symbol">☽</div>
+                        <div class="hv-name">The Moon</div>
+                    </div>
+                </div>
+
+                <div class="hv-float hv-f2">
+                    <div class="hv-card hv-c2">
+                        <div class="hv-symbol">★</div>
+                        <div class="hv-name">The Star</div>
+                    </div>
+                </div>
+
+                <div class="hv-float hv-f3">
+                    <div class="hv-card hv-c3">
+                        <div class="hv-symbol">✦</div>
+                        <div class="hv-name">The Fool</div>
+                    </div>
+                </div>
+
+                <span class="hv-spark s1">✦</span>
+                <span class="hv-spark s2">✦</span>
+                <span class="hv-spark s3">✦</span>
+                <span class="hv-spark s4">✦</span>
             </div>
         </div>
 
