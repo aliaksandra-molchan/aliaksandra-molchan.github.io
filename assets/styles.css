@@ -1533,25 +1533,61 @@
 .about-values {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .value-card {
-  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
-  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.16);
   border-radius: var(--radius);
-  padding: 16px 18px;
+  padding: 18px 20px;
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
+  align-items: center;
+  gap: 16px;
   box-shadow: var(--shadow2);
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
+/* top shimmer line */
+.value-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+}
+
+.value-card:hover {
+  transform: translateX(4px);
+  background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.08));
+  border-color: rgba(255,255,255,.24);
+}
+
+/* Icon orb */
 .value-icon {
-  font-size: 18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
   flex: 0 0 auto;
-  opacity: .85;
-  margin-top: 1px;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  border: 1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+}
+
+/* Per-card accent colors */
+.value-card:nth-child(1) .value-icon {
+  background: linear-gradient(135deg, rgba(122, 85, 255, .55), rgba(180, 130, 255, .35));
+}
+.value-card:nth-child(2) .value-icon {
+  background: linear-gradient(135deg, rgba(224, 75, 122, .55), rgba(255, 140, 180, .35));
+}
+.value-card:nth-child(3) .value-icon {
+  background: linear-gradient(135deg, rgba(60, 170, 255, .55), rgba(120, 210, 255, .35));
 }
 
 .value-title {
