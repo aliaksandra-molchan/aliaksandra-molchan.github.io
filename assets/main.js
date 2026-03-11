@@ -16,6 +16,10 @@ document.getElementById("year").textContent = new Date().getFullYear();
       if (e.isIntersecting) {
         e.target.classList.add('show');
         io.unobserve(e.target);
+        // Remove reveal class from .app cards after animation so hover uses their own transition
+        if (e.target.classList.contains('app')) {
+          setTimeout(() => e.target.classList.remove('reveal'), 800);
+        }
       }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });

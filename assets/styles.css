@@ -329,7 +329,10 @@
     display:flex;
     gap:14px;
     align-items:flex-start;
-    transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    transition: transform .22s cubic-bezier(0.34, 1.56, 0.64, 1),
+                background .22s ease,
+                border-color .22s ease,
+                box-shadow .22s ease;
     position:relative;
     overflow:hidden;
     min-height: 146px;
@@ -342,10 +345,27 @@
     opacity:.75;
     pointer-events:none;
   }
+  /* subtle shine on hover */
+  .app::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(135deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 60%);
+    opacity:0;
+    transition: opacity .22s ease;
+    pointer-events:none;
+  }
   .app:hover{
-    transform: translateY(-3px);
+    transform: translateY(-5px) scale(1.015);
     background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.10));
-    border-color: rgba(255,255,255,.22);
+    border-color: rgba(255,255,255,.28);
+    box-shadow: 0 28px 64px rgba(0,0,0,.28);
+  }
+  .app:hover::after{
+    opacity:1;
+  }
+  .app:hover .app-icon{
+    transform: scale(1.18) rotate(-3deg);
   }
   .app-icon{
     width:54px;height:54px;
@@ -358,6 +378,7 @@
     place-items:center;
     position:relative;
     z-index:1;
+    transition: transform .22s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .app-icon img{
     width:100%;
