@@ -1411,6 +1411,274 @@
   .fc-4 { width: 66px; height: 66px; }
 }
 
+/* =============================================
+   NAV ACCENT PILL
+   ============================================= */
+
+.pill-accent {
+  background: rgba(255,255,255,.18);
+  border-color: rgba(255,255,255,.28);
+  font-weight: 600;
+}
+.pill-accent:hover {
+  background: rgba(255,255,255,.26);
+  border-color: rgba(255,255,255,.40);
+}
+
+/* =============================================
+   STATS BAR
+   ============================================= */
+
+.stats-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: var(--radius2);
+  box-shadow: var(--shadow2);
+  padding: 22px 28px;
+  margin-top: 14px;
+  gap: 0;
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.5px;
+  color: var(--text);
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: .2px;
+}
+
+.stat-sep {
+  width: 1px;
+  height: 38px;
+  background: rgba(255,255,255,.14);
+  flex: 0 0 auto;
+}
+
+/* =============================================
+   ABOUT
+   ============================================= */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.about-lead {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 14px;
+}
+
+.about-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+}
+
+.about-values {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.value-card {
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: var(--shadow2);
+}
+
+.value-icon {
+  font-size: 18px;
+  flex: 0 0 auto;
+  opacity: .85;
+  margin-top: 1px;
+}
+
+.value-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  letter-spacing: .1px;
+}
+
+.value-body {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* =============================================
+   WORK WITH US (COLLAB)
+   ============================================= */
+
+.collab-card {
+  background: linear-gradient(135deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.07) 100%);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: var(--radius2);
+  box-shadow: var(--shadow);
+  padding: 36px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.collab-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 50%, rgba(255,255,255,.12), transparent 55%);
+  pointer-events: none;
+}
+
+.collab-left { flex: 1; min-width: 0; position: relative; }
+
+.collab-title {
+  margin: 12px 0 10px;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.1;
+}
+
+.collab-body {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 52ch;
+}
+
+.collab-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ctag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.10);
+  color: rgba(255,255,255,.80);
+}
+
+.collab-cta {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+/* =============================================
+   CONTACT
+   ============================================= */
+
+.contact-card {
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: var(--radius2);
+  box-shadow: var(--shadow2);
+  padding: 48px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.contact-title {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 34px);
+}
+
+.contact-body {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 50ch;
+}
+
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  padding: 14px 30px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.24);
+  transition: background .18s ease, transform .18s ease, border-color .18s ease;
+  letter-spacing: .2px;
+}
+
+.contact-email:hover {
+  background: rgba(255,255,255,.20);
+  border-color: rgba(255,255,255,.36);
+  transform: translateY(-2px);
+}
+
+/* =============================================
+   RESPONSIVE — new sections
+   ============================================= */
+
+@media (max-width: 860px) {
+  .about-grid { grid-template-columns: 1fr; }
+
+  .collab-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px;
+    gap: 24px;
+  }
+
+  .collab-cta { align-self: flex-start; }
+}
+
+@media (max-width: 560px) {
+  .stats-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 20px;
+  }
+  .stat-sep { display: none; }
+
+  .contact-card { padding: 32px 20px; }
+}
+
 .policy {
   max-width: 900px;      /* комфортная ширина для чтения */
   margin: 0 auto;          /* центрирование */
