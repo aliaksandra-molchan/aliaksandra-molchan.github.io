@@ -448,6 +448,17 @@
     border-color: rgba(255,255,255,.22);
   }
   .gp svg{ flex:0 0 auto; }
+
+  .app-learn-more {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,.70);
+    text-decoration: none;
+    transition: color .18s ease;
+  }
+  .app-learn-more:hover {
+    color: rgba(255,255,255,1);
+  }
   
   /* Footer */
   footer{

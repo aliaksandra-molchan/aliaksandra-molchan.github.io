@@ -1,0 +1,264 @@
+/* ===============================================
+   APP PAGE — styles for /apps/*.html
+   =============================================== */
+
+/* HERO */
+.ap-hero {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 36px;
+  align-items: center;
+  background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 28px;
+  padding: 44px 40px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.22);
+  position: relative;
+  overflow: hidden;
+}
+
+.ap-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
+}
+
+.ap-hero-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,.3);
+  flex: 0 0 auto;
+}
+
+.ap-hero-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ap-title {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 700;
+  margin: 6px 0 10px;
+  letter-spacing: -.5px;
+  line-height: 1.1;
+}
+
+.ap-tagline {
+  font-size: 17px;
+  color: rgba(255,255,255,.80);
+  margin: 0 0 18px;
+  line-height: 1.5;
+  max-width: 48ch;
+}
+
+.ap-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.ap-stars {
+  color: #FFD060;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.ap-rating-val {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.ap-rating-label {
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+}
+
+.ap-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ABOUT */
+.ap-about {
+  margin-top: 32px;
+}
+
+.ap-about-text {
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.82);
+  margin: 0;
+  max-width: 72ch;
+}
+
+/* FEATURES */
+.ap-features {
+  margin-top: 10px;
+}
+
+.ap-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.ap-feature {
+  background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 22px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.ap-feature:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.08));
+}
+
+.ap-feat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.22);
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  backdrop-filter: blur(6px);
+  flex: 0 0 auto;
+}
+
+.ap-feat-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ap-feat-body {
+  font-size: 13px;
+  color: rgba(255,255,255,.68);
+  line-height: 1.5;
+}
+
+/* REVIEWS */
+.ap-reviews {
+  margin-top: 10px;
+}
+
+.ap-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.ap-review {
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 22px;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ap-review-stars {
+  color: #FFD060;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.ap-review-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.80);
+  margin: 0;
+  flex: 1;
+}
+
+.ap-review-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ap-review-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+.ap-review-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* DOWNLOAD CTA */
+.ap-download {
+  background: linear-gradient(135deg, rgba(122,85,255,.25), rgba(224,75,122,.18));
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 28px;
+  padding: 52px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ap-dl-title {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  margin: 0;
+}
+
+.ap-dl-body {
+  font-size: 15px;
+  color: rgba(255,255,255,.68);
+  margin: 0 0 8px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  .ap-hero {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+    gap: 22px;
+  }
+
+  .ap-hero-icon {
+    width: 96px;
+    height: 96px;
+  }
+
+  .ap-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ap-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .ap-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ap-download {
+    padding: 36px 24px;
+  }
+}
