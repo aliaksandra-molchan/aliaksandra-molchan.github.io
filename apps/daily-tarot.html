@@ -73,6 +73,17 @@
             align-items: center;
         }
 
+        /* About strip inside hero — spans all 3 columns */
+        .ap-hero-about {
+            grid-column: 1 / -1;
+            border-top: 1px solid rgba(180,130,255,.18);
+            padding-top: 28px;
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
         .ap-hero::after {
             content: "✦";
             position: absolute;
@@ -655,6 +666,18 @@
                 <span class="hv-spark s2">✦</span>
                 <span class="hv-spark s3">✦</span>
                 <span class="hv-spark s4">✦</span>
+            </div>
+
+            <!-- About strip inside hero card -->
+            <div class="ap-hero-about">
+                <div class="ap-about-ornament" aria-hidden="true">✦</div>
+                <p class="ap-about-text">Daily Tarot is your personal guide to the cards — designed to feel calm, beautiful, and easy to use every day. Whether you're a beginner or experienced reader, the app offers a peaceful space for daily reflection and exploration.</p>
+                <div class="ap-about-tags">
+                    <span class="ap-tag">☽ Beginner-friendly</span>
+                    <span class="ap-tag">✦ 78 Cards</span>
+                    <span class="ap-tag">⊞ Multiple spreads</span>
+                    <span class="ap-tag">♡ Free</span>
+                </div>
             </div>
         </div>
 
