@@ -187,6 +187,101 @@
         @media (max-width: 560px) {
             .ap-hero { grid-template-columns: 1fr !important; }
         }
+        /* ══════════════════════════════════════════════
+           COHESION — unified tarot palette across all sections
+           ══════════════════════════════════════════════ */
+
+        /* Feature cards → tarot purple */
+        .ap-feature {
+            background: linear-gradient(160deg, rgba(52,16,96,.6), rgba(26,8,58,.55));
+            border-color: rgba(140,90,220,.25);
+        }
+        .ap-feature:hover {
+            background: linear-gradient(160deg, rgba(72,26,126,.65), rgba(36,11,78,.6));
+            border-color: rgba(165,115,245,.4);
+            transform: translateY(-4px);
+        }
+
+        /* Review cards → tarot purple */
+        .ap-review {
+            background: linear-gradient(160deg, rgba(40,12,80,.58), rgba(20,7,50,.5));
+            border-color: rgba(140,90,220,.22);
+        }
+
+        /* Download CTA → richer purple gradient */
+        .ap-download {
+            background: linear-gradient(135deg, rgba(100,55,200,.32), rgba(160,50,130,.24));
+            border-color: rgba(180,130,255,.3);
+        }
+
+        /* Section headings — subtle gold ✦ accent */
+        .section-head h2::after {
+            content: " ✦";
+            color: rgba(255,208,96,.3);
+            font-size: 0.5em;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        /* About section — proper card */
+        .ap-about-card {
+            background: linear-gradient(160deg, rgba(52,16,96,.52), rgba(26,8,58,.48));
+            border: 1px solid rgba(180,130,255,.24);
+            border-radius: 24px;
+            padding: 36px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .ap-about-card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(180,130,255,.45), transparent);
+        }
+        .ap-about-ornament {
+            font-size: 28px;
+            color: rgba(255,208,96,.28);
+            line-height: 1;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 0 10px rgba(255,208,96,.18));
+        }
+        .ap-about-text {
+            font-size: 18px;
+            line-height: 1.72;
+            color: rgba(255,255,255,.85);
+            margin: 0 0 24px;
+            max-width: 68ch;
+        }
+        .ap-about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .ap-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 15px;
+            border-radius: 100px;
+            background: rgba(122,85,255,.18);
+            border: 1px solid rgba(180,130,255,.28);
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255,255,255,.75);
+            letter-spacing: .3px;
+        }
+
+        /* Dividers — more generous vertical spacing */
+        .tarot-divider {
+            margin: 20px 0;
+        }
+
+        /* Responsive: hide visual on narrow screens */
+        @media (max-width: 860px) {
+            .ap-hero { grid-template-columns: 1fr; }
+            .ap-hero-visual { display: none; }
+        }
     </style>
 </head>
 
@@ -271,9 +366,21 @@
             </div>
         </div>
 
+        <!-- separator -->
+        <div class="tarot-divider reveal" data-reveal="fade">✦</div>
+
         <!-- ABOUT -->
         <section class="ap-about reveal" data-reveal="up">
-            <p class="ap-about-text">Daily Tarot is your personal guide to the cards — designed to feel calm, beautiful, and easy to use every day. Whether you're a beginner or experienced reader, the app offers a peaceful space for daily reflection and exploration.</p>
+            <div class="ap-about-card">
+                <div class="ap-about-ornament" aria-hidden="true">✦</div>
+                <p class="ap-about-text">Daily Tarot is your personal guide to the cards — designed to feel calm, beautiful, and easy to use every day. Whether you're a beginner or experienced reader, the app offers a peaceful space for daily reflection and exploration.</p>
+                <div class="ap-about-tags">
+                    <span class="ap-tag">☽ Beginner-friendly</span>
+                    <span class="ap-tag">✦ 78 Cards</span>
+                    <span class="ap-tag">⊞ Multiple spreads</span>
+                    <span class="ap-tag">♡ Free</span>
+                </div>
+            </div>
         </section>
 
         <!-- DRAW YOUR CARD -->
@@ -368,6 +475,9 @@
             <div class="tarot-divider reveal" data-reveal="fade">✦ ✦ ✦</div>
         </section>
 
+        <!-- separator -->
+        <div class="tarot-divider reveal" data-reveal="fade">✦</div>
+
         <!-- FEATURES -->
         <section class="ap-features">
             <div class="section-head reveal" data-reveal="up">
@@ -396,6 +506,9 @@
                 </div>
             </div>
         </section>
+
+        <!-- separator -->
+        <div class="tarot-divider reveal" data-reveal="fade">✦</div>
 
         <!-- REVIEWS -->
         <section class="ap-reviews">
