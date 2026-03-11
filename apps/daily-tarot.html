@@ -252,6 +252,22 @@
             color: rgba(255,255,255,.85);
             margin: 0 0 24px;
             max-width: 68ch;
+            position: relative;
+            padding-left: 16px;
+        }
+        .ap-about-text::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 2px;
+            border-radius: 2px;
+            background: linear-gradient(180deg,
+                rgba(255,208,96,.65),
+                rgba(180,130,255,.5),
+                transparent
+            );
         }
         .ap-about-tags {
             display: flex;
