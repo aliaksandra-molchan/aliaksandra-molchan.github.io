@@ -1213,115 +1213,202 @@
 }
 
 /* =============================================
-   HERO APP SHOWCASE
+   HERO FLOATING CLUSTER
    ============================================= */
 
-.app-showcase {
+.float-cluster {
   position: relative;
-  display: inline-block;
-}
-
-.showcase-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  padding: 4px 28px 28px 4px; /* bottom + right — место для бейджа */
-}
-
-.sc-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.sc-icon {
-  width: 84px;
-  height: 84px;
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.20);
-  box-shadow: 0 8px 28px rgba(0,0,0,.28);
-  transition: transform .22s ease, box-shadow .22s ease;
+  width: 270px;
+  height: 250px;
   flex: 0 0 auto;
 }
 
-.sc-icon:hover {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 14px 36px rgba(0,0,0,.36);
-}
-
-.sc-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.sc-label {
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(255,255,255,.60);
-  text-align: center;
-  white-space: nowrap;
-  letter-spacing: .2px;
-}
-
-/* Бейдж рейтинга — плавает в правом нижнем углу */
-.showcase-badge {
+/* Sparkle частицы */
+.sp {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  background: rgba(255,255,255,.14);
-  border: 1px solid rgba(255,255,255,.26);
-  border-radius: 18px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 10px 14px;
+  line-height: 1;
+  pointer-events: none;
+  animation: spDrift 5s ease-in-out infinite, spFade 5s ease-in-out infinite;
+}
+
+@keyframes spDrift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-10px) rotate(15deg); }
+}
+
+@keyframes spFade {
+  0%, 100% { opacity: .25; }
+  50%       { opacity: .85; }
+}
+
+/* Размеры, позиции, задержки */
+.sp-1 { font-size: 26px; top: 8px;  left: 10px;  color: #FFD055; animation-delay: 0s;     animation-duration: 5.5s; }
+.sp-2 { font-size: 14px; top: 20px; right: 18px; color: #fff;    animation-delay: -1.2s;  animation-duration: 4.8s; }
+.sp-3 { font-size: 10px; top: 50%;  left: 4px;   color: #FFD055; animation-delay: -2.8s;  animation-duration: 6.2s; }
+.sp-4 { font-size: 20px; bottom: 18px; left: 14px; color: #fff;  animation-delay: -0.6s;  animation-duration: 5.0s; }
+.sp-5 { font-size: 13px; bottom: 10px; right: 12px; color: #FFD055; animation-delay: -3.5s; animation-duration: 4.5s; }
+.sp-6 { font-size: 8px;  top: 30px; left: 42%;   color: #fff;    animation-delay: -4.2s;  animation-duration: 6.8s; }
+.sp-7 { font-size: 18px; top: 12px; right: 46px; color: #FFD055; animation-delay: -1.8s;  animation-duration: 5.2s; }
+.sp-8 { font-size: 9px;  bottom: 35px; right: 6px; color: #fff;  animation-delay: -5s;    animation-duration: 4.2s; }
+
+@keyframes fcFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-11px); }
+}
+
+@keyframes fcFloatCenter {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+  50%       { transform: translate(-50%, -50%) translateY(-11px); }
+}
+
+/* Рейтинг-бейдж в центре поверх иконок */
+.fc-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: linear-gradient(
+    160deg,
+    rgba(255,255,255,.34) 0%,
+    rgba(255,228,130,.10) 52%,
+    rgba(255,255,255,.16) 100%
+  );
+  border: 1px solid rgba(255,255,255,.44);
+  border-radius: 26px;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  padding: 18px 28px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1px;
-  box-shadow: 0 12px 32px rgba(0,0,0,.24), 0 0 0 1px rgba(255,255,255,.08) inset;
-  min-width: 80px;
-}
-
-.showcase-badge-score {
-  font-size: 26px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: .2px;
-}
-
-.showcase-badge-stars {
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: #FFD055;
-  text-shadow: 0 0 8px rgba(255,208,85,.40);
-}
-
-.showcase-badge-sub {
-  font-size: 10px;
-  color: rgba(255,255,255,.58);
+  gap: 4px;
+  box-shadow:
+    0 24px 64px rgba(0,0,0,.38),
+    0 0 0 1px rgba(255,255,255,.18) inset,
+    0 2px 0 rgba(255,255,255,.44) inset;
   white-space: nowrap;
-  margin-top: 3px;
-  font-weight: 500;
+  z-index: 6;
+  animation: fcFloatCenter 6s ease-in-out infinite;
+  animation-delay: -2.5s;
+  overflow: hidden;
 }
 
-/* Адаптив — на мобилке центрируем showcase */
+/* Shimmer-пробег поверх карточки */
+.fc-badge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    108deg,
+    transparent 25%,
+    rgba(255,255,255,.20) 50%,
+    transparent 75%
+  );
+  clip-path: inset(0 round 26px);
+  transform: translateX(-120%);
+  animation: shimmerSweep 4.5s ease-in-out infinite;
+  animation-delay: -0.5s;
+  pointer-events: none;
+}
+
+@keyframes shimmerSweep {
+  0%   { transform: translateX(-120%); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateX(220%); opacity: 0; }
+}
+
+/* Ореол — отдельный элемент, чтобы не конфликтовать с overflow:hidden на бейдже */
+.fc-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 210px;
+  height: 160px;
+  background: radial-gradient(circle,
+    rgba(255,255,255,.24) 0%,
+    rgba(255,208,85,.14) 45%,
+    transparent 70%
+  );
+  filter: blur(18px);
+  z-index: 5;
+  pointer-events: none;
+  border-radius: 50%;
+  animation: haloBreath 4s ease-in-out infinite;
+  animation-delay: -2.5s;
+}
+
+@keyframes haloBreath {
+  0%, 100% { opacity: .85; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
+}
+
+.fc-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.50);
+  margin-bottom: 2px;
+}
+
+.fc-divider {
+  width: 44px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,208,85,.55), transparent);
+  margin: 3px 0 1px;
+}
+
+.fc-score {
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+  text-shadow: 0 2px 24px rgba(255,255,255,.28);
+}
+
+.fc-stars {
+  font-size: 17px;
+  letter-spacing: 4px;
+  color: #FFD055;
+  text-shadow:
+    0 0 8px  rgba(255,208,85,.80),
+    0 0 24px rgba(255,208,85,.50);
+  animation: starsGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes starsGlow {
+  0%, 100% {
+    text-shadow: 0 0 8px rgba(255,208,85,.80), 0 0 24px rgba(255,208,85,.50);
+  }
+  50% {
+    text-shadow: 0 0 14px rgba(255,208,85,1), 0 0 40px rgba(255,208,85,.70);
+  }
+}
+
+.fc-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,.60);
+  font-weight: 500;
+  letter-spacing: .4px;
+  margin-top: 1px;
+}
+
+/* Адаптив — центрируем кластер на мобилке */
 @media (max-width: 860px) {
   .hero-visual {
     align-items: center;
   }
 
-  .app-showcase {
-    display: inline-block;
+  .float-cluster {
+    width: 240px;
+    height: 220px;
   }
 
-  .sc-icon {
-    width: 72px;
-    height: 72px;
-  }
+  .fc-1 { width: 82px; height: 82px; }
+  .fc-2 { width: 70px; height: 70px; }
+  .fc-3 { width: 74px; height: 74px; }
+  .fc-4 { width: 66px; height: 66px; }
 }
 
 .policy {
