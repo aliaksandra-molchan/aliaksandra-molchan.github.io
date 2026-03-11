@@ -46,6 +46,37 @@
 
     <link rel="stylesheet" href="../assets/styles.css" />
     <link rel="stylesheet" href="../assets/app-page.css" />
+    <style>
+        /* Tarot theme overrides for this page */
+        .blob.b1 { background: radial-gradient(ellipse, rgba(122,85,255,.45) 0%, transparent 70%); }
+        .blob.b2 { background: radial-gradient(ellipse, rgba(180,60,140,.35) 0%, transparent 70%); }
+
+        .ap-hero {
+            background: linear-gradient(145deg, rgba(122,85,255,.18), rgba(30,11,66,.6));
+            border-color: rgba(180,130,255,.3);
+        }
+
+        .ap-hero::after {
+            content: "✦";
+            position: absolute;
+            top: 20px;
+            right: 28px;
+            font-size: 18px;
+            color: rgba(255,208,96,.35);
+            pointer-events: none;
+        }
+
+        /* golden star accent scattered */
+        .tarot-stars {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: rgba(255,208,96,.4);
+            font-size: 13px;
+            letter-spacing: 6px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -76,6 +107,7 @@
                 <img src="https://play-lh.googleusercontent.com/IqECM4U8X0Y88V0mk6r08UomMa3ugB108qfTREu8RhCHYQu3W3uheyWqx96kErUZgQ=w480-h960-rw" alt="Daily Tarot app icon">
             </div>
             <div class="ap-hero-body">
+                <div class="tarot-stars">✦ ✦ ✦</div>
                 <div class="kicker"><span class="dot"></span>Lifestyle &nbsp;·&nbsp; Free</div>
                 <h1 class="ap-title">Daily Tarot</h1>
                 <p class="ap-tagline">Gentle card readings and calm reflections — every single day.</p>
@@ -101,6 +133,98 @@
         <!-- ABOUT -->
         <section class="ap-about reveal" data-reveal="up">
             <p class="ap-about-text">Daily Tarot is your personal guide to the cards — designed to feel calm, beautiful, and easy to use every day. Whether you're a beginner or experienced reader, the app offers a peaceful space for daily reflection and exploration.</p>
+        </section>
+
+        <!-- DRAW YOUR CARD -->
+        <section class="ap-draw">
+            <div class="section-head reveal" data-reveal="up">
+                <h2>Draw your card</h2>
+                <p class="ap-draw-intro">Tap a card and receive a message for today ✦</p>
+            </div>
+
+            <div class="tc-deck" data-stagger>
+                <!-- Card 1: The Fool -->
+                <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Fool">
+                    <div class="tc-inner">
+                        <div class="tc-front">
+                            <div class="tc-front-symbol">✦</div>
+                            <div class="tc-front-label">Tap to reveal</div>
+                        </div>
+                        <div class="tc-back">
+                            <div class="tc-card-symbol">☽</div>
+                            <div class="tc-card-name">The Fool</div>
+                            <div class="tc-card-msg">A new adventure begins. Trust the leap — the universe has your back.</div>
+                            <div class="tc-card-hint">Explore all 78 cards in the app ↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: The Star -->
+                <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Star">
+                    <div class="tc-inner">
+                        <div class="tc-front">
+                            <div class="tc-front-symbol">✦</div>
+                            <div class="tc-front-label">Tap to reveal</div>
+                        </div>
+                        <div class="tc-back">
+                            <div class="tc-card-symbol">★</div>
+                            <div class="tc-card-name">The Star</div>
+                            <div class="tc-card-msg">Hope and renewal are flowing toward you. Rest, and let yourself shine.</div>
+                            <div class="tc-card-hint">Explore all 78 cards in the app ↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: The Moon -->
+                <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Moon">
+                    <div class="tc-inner">
+                        <div class="tc-front">
+                            <div class="tc-front-symbol">✦</div>
+                            <div class="tc-front-label">Tap to reveal</div>
+                        </div>
+                        <div class="tc-back">
+                            <div class="tc-card-symbol">🌙</div>
+                            <div class="tc-card-name">The Moon</div>
+                            <div class="tc-card-msg">Your intuition sees clearly. Trust what stirs beneath the surface.</div>
+                            <div class="tc-card-hint">Explore all 78 cards in the app ↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: The Sun -->
+                <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Sun">
+                    <div class="tc-inner">
+                        <div class="tc-front">
+                            <div class="tc-front-symbol">✦</div>
+                            <div class="tc-front-label">Tap to reveal</div>
+                        </div>
+                        <div class="tc-back">
+                            <div class="tc-card-symbol">☀</div>
+                            <div class="tc-card-name">The Sun</div>
+                            <div class="tc-card-msg">Clarity and joy are yours today. Step into the light with confidence.</div>
+                            <div class="tc-card-hint">Explore all 78 cards in the app ↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: The World -->
+                <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The World">
+                    <div class="tc-inner">
+                        <div class="tc-front">
+                            <div class="tc-front-symbol">✦</div>
+                            <div class="tc-front-label">Tap to reveal</div>
+                        </div>
+                        <div class="tc-back">
+                            <div class="tc-card-symbol">◎</div>
+                            <div class="tc-card-name">The World</div>
+                            <div class="tc-card-msg">A cycle completes with grace. Celebrate how far you've come.</div>
+                            <div class="tc-card-hint">Explore all 78 cards in the app ↗</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tarot-divider reveal" data-reveal="fade">✦ ✦ ✦</div>
         </section>
 
         <!-- FEATURES -->

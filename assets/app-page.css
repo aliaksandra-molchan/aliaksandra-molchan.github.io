@@ -231,6 +231,169 @@
   margin: 0 0 8px;
 }
 
+/* ===============================================
+   TAROT DRAW SECTION
+   =============================================== */
+.ap-draw {
+  margin-top: 10px;
+}
+
+.ap-draw-intro {
+  font-size: 15px;
+  color: rgba(255,255,255,.60);
+  margin: 6px 0 0;
+}
+
+.tc-deck {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 8px 0 4px;
+}
+
+/* Individual tarot card */
+.tc {
+  width: 130px;
+  height: 210px;
+  perspective: 900px;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.tc-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tc.flipped .tc-inner {
+  transform: rotateY(180deg);
+}
+
+.tc-front,
+.tc-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* Face-down (front = what you see before flip) */
+.tc-front {
+  background: linear-gradient(160deg, #1a0a3d, #2d1060);
+  border: 1px solid rgba(180,130,255,.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.07) inset;
+}
+
+.tc-front::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(180,130,255,.22);
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(122,85,255,.06) 8px, rgba(122,85,255,.06) 9px),
+    repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(122,85,255,.06) 8px, rgba(122,85,255,.06) 9px);
+}
+
+.tc-front-symbol {
+  font-size: 28px;
+  position: relative;
+  filter: drop-shadow(0 0 8px rgba(180,130,255,.7));
+}
+
+.tc-front-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(180,130,255,.75);
+  font-weight: 600;
+  position: relative;
+}
+
+/* hover lift before flip */
+.tc:not(.flipped):hover .tc-inner {
+  transform: translateY(-6px) rotateY(8deg);
+}
+
+/* Face-up (back = revealed card) */
+.tc-back {
+  background: linear-gradient(160deg, #1e0b42, #3a1480);
+  border: 1px solid rgba(255,208,96,.35);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 14px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 20px rgba(255,208,96,.08) inset;
+}
+
+.tc-back::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,208,96,.5), transparent);
+}
+
+.tc-card-symbol {
+  font-size: 32px;
+  filter: drop-shadow(0 0 10px rgba(255,208,96,.6));
+}
+
+.tc-card-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #FFD060;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.tc-card-msg {
+  font-size: 12px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.78);
+}
+
+.tc-card-hint {
+  font-size: 10px;
+  color: rgba(255,208,96,.55);
+  letter-spacing: .5px;
+  margin-top: 2px;
+}
+
+/* tarot-themed decorative divider */
+.tarot-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(180,130,255,.45);
+  font-size: 14px;
+  letter-spacing: 4px;
+  margin: 8px 0 0;
+  user-select: none;
+}
+.tarot-divider::before,
+.tarot-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(180,130,255,.3), transparent);
+}
+
 /* RESPONSIVE */
 @media (max-width: 860px) {
   .ap-hero {
@@ -260,5 +423,14 @@
 
   .ap-download {
     padding: 36px 24px;
+  }
+
+  .tc-deck {
+    gap: 10px;
+  }
+
+  .tc {
+    width: 110px;
+    height: 178px;
   }
 }
