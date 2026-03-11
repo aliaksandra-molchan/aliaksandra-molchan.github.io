@@ -1212,6 +1212,118 @@
   .carousel-btn { width: 38px; height: 38px; }
 }
 
+/* =============================================
+   HERO APP SHOWCASE
+   ============================================= */
+
+.app-showcase {
+  position: relative;
+  display: inline-block;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 4px 28px 28px 4px; /* bottom + right — место для бейджа */
+}
+
+.sc-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sc-icon {
+  width: 84px;
+  height: 84px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.20);
+  box-shadow: 0 8px 28px rgba(0,0,0,.28);
+  transition: transform .22s ease, box-shadow .22s ease;
+  flex: 0 0 auto;
+}
+
+.sc-icon:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 14px 36px rgba(0,0,0,.36);
+}
+
+.sc-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.sc-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,.60);
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: .2px;
+}
+
+/* Бейдж рейтинга — плавает в правом нижнем углу */
+.showcase-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.26);
+  border-radius: 18px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.24), 0 0 0 1px rgba(255,255,255,.08) inset;
+  min-width: 80px;
+}
+
+.showcase-badge-score {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .2px;
+}
+
+.showcase-badge-stars {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #FFD055;
+  text-shadow: 0 0 8px rgba(255,208,85,.40);
+}
+
+.showcase-badge-sub {
+  font-size: 10px;
+  color: rgba(255,255,255,.58);
+  white-space: nowrap;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+/* Адаптив — на мобилке центрируем showcase */
+@media (max-width: 860px) {
+  .hero-visual {
+    align-items: center;
+  }
+
+  .app-showcase {
+    display: inline-block;
+  }
+
+  .sc-icon {
+    width: 72px;
+    height: 72px;
+  }
+}
+
 .policy {
   max-width: 900px;      /* комфортная ширина для чтения */
   margin: 0 auto;          /* центрирование */
