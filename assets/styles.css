@@ -1718,6 +1718,121 @@
   transform: translateY(-2px);
 }
 
+/* Contact form */
+.contact-form {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.cf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.cf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cf-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.60);
+}
+
+.cf-input {
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: background .18s ease, border-color .18s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cf-input::placeholder {
+  color: rgba(255,255,255,.35);
+}
+
+.cf-input:focus {
+  background: rgba(255,255,255,.15);
+  border-color: rgba(255,255,255,.40);
+}
+
+.cf-textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.5;
+}
+
+.cf-submit {
+  align-self: flex-end;
+  margin-top: 4px;
+}
+
+.cf-input--error {
+  border-color: rgba(255, 100, 100, .6);
+  background: rgba(255, 80, 80, .08);
+}
+
+.cf-error {
+  font-size: 12px;
+  color: rgba(255, 160, 160, .95);
+  margin-top: 2px;
+}
+
+/* Success state — hidden by default, shown via .is-visible */
+.cf-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px;
+}
+.cf-success.is-visible {
+  display: flex;
+  animation: cfFadeIn .4s ease;
+}
+
+.cf-success-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(122,85,255,.5), rgba(60,170,255,.4));
+  border: 1px solid rgba(255,255,255,.22);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.cf-success p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+@keyframes cfFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 560px) {
+  .cf-row { grid-template-columns: 1fr; }
+  .cf-submit { align-self: stretch; text-align: center; }
+}
+
 /* =============================================
    RESPONSIVE — new sections
    ============================================= */

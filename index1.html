@@ -480,7 +480,32 @@
             <div class="contact-card reveal" data-reveal="scale">
                 <h2 class="contact-title">Get in touch</h2>
                 <p class="contact-body">User feedback, collaboration ideas, or a custom app project — we're always happy to hear from you.</p>
-                <a class="contact-email" href="mailto:hello@noks.app">hello@noks.app</a>
+
+                <!-- Formspree endpoint is safe to expose publicly — it can only receive submissions, not access the account -->
+                <form class="contact-form" action="https://formspree.io/f/mojkdjkv" method="POST" novalidate>
+                    <div class="cf-row">
+                        <div class="cf-field">
+                            <label class="cf-label" for="cf-name">Name</label>
+                            <input class="cf-input" id="cf-name" type="text" name="name" placeholder="Your name" required>
+                        </div>
+                        <div class="cf-field">
+                            <label class="cf-label" for="cf-email">Email</label>
+                            <input class="cf-input" id="cf-email" type="email" name="email" placeholder="your@email.com" required>
+                        </div>
+                    </div>
+                    <div class="cf-field">
+                        <label class="cf-label" for="cf-msg">Message</label>
+                        <textarea class="cf-input cf-textarea" id="cf-msg" name="message" placeholder="Tell us about your project or question…" required></textarea>
+                    </div>
+                    <!-- Honeypot — bots fill this, humans don't -->
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                    <button class="btn btn-primary cf-submit" type="submit">Send message →</button>
+                </form>
+
+                <div class="cf-success" aria-live="polite">
+                    <span class="cf-success-icon">✓</span>
+                    <p>Message sent! We'll get back to you soon.</p>
+                </div>
             </div>
         </section>
 

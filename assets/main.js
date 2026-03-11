@@ -1,6 +1,78 @@
 // Year
 document.getElementById("year").textContent = new Date().getFullYear();
 
+// Contact form — AJAX submit with custom validation
+(function initContactForm() {
+  const form = document.querySelector('.contact-form');
+  if (!form) return;
+  const success = document.querySelector('.cf-success');
+
+  function setError(input, msg) {
+    input.classList.add('cf-input--error');
+    let err = input.parentElement.querySelector('.cf-error');
+    if (!err) {
+      err = document.createElement('span');
+      err.className = 'cf-error';
+      input.parentElement.appendChild(err);
+    }
+    err.textContent = msg;
+  }
+
+  function clearError(input) {
+    input.classList.remove('cf-input--error');
+    const err = input.parentElement.querySelector('.cf-error');
+    if (err) err.remove();
+  }
+
+  function validate() {
+    let ok = true;
+    const name  = form.querySelector('[name="name"]');
+    const email = form.querySelector('[name="email"]');
+    const msg   = form.querySelector('[name="message"]');
+
+    clearError(name); clearError(email); clearError(msg);
+
+    if (!name.value.trim())  { setError(name,  'Please enter your name');           ok = false; }
+    if (!email.value.trim()) { setError(email, 'Please enter your email');          ok = false; }
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                               setError(email, 'Please enter a valid email');       ok = false; }
+    if (!msg.value.trim())   { setError(msg,   'Please write your message');        ok = false; }
+    return ok;
+  }
+
+  // Clear error on input
+  form.querySelectorAll('.cf-input').forEach(input => {
+    input.addEventListener('input', () => clearError(input));
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const btn = form.querySelector('.cf-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        success.classList.add('is-visible');
+      } else {
+        btn.textContent = 'Something went wrong. Try again.';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Network error. Try again.';
+      btn.disabled = false;
+    }
+  });
+})();
+
 // Reveal-on-scroll animation
 (function initReveal() {
   // Auto-assign staggered delays to .reveal children of [data-stagger] containers
