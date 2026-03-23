@@ -1,0 +1,1555 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Daily Tarot — Daily Card Readings & Spreads | Noks</title>
+    <meta name="description" content="Daily Tarot brings you gentle card readings, beautiful spreads, and calm reflections — every day. Free on Google Play." />
+    <meta name="theme-color" content="#7A55FF" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Daily Tarot — Daily Card Readings & Spreads" />
+    <meta property="og:description" content="Gentle card readings, beautiful spreads, and calm reflections — every day. Free on Google Play." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://play-lh.googleusercontent.com/IqECM4U8X0Y88V0mk6r08UomMa3ugB108qfTREu8RhCHYQu3W3uheyWqx96kErUZgQ=w480-h960-rw" />
+
+    <!-- Schema.org SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Daily Tarot",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "ratingCount": "100000"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Daily tarot cards readings, gentle reflections, and a cozy tarot routine.",
+      "author": {
+        "@type": "Organization",
+        "name": "Noks Studio"
+      }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/app-page.css" />
+    <style>
+        /* Tarot theme overrides for this page */
+        .blob.b1 { background: radial-gradient(ellipse, rgba(122,85,255,.45) 0%, transparent 70%); }
+        .blob.b2 { background: radial-gradient(ellipse, rgba(180,60,140,.35) 0%, transparent 70%); }
+
+        /* CTA button — purple to match tarot theme, white icon fits naturally */
+        .ap-cta {
+            background: linear-gradient(135deg, rgba(122,85,255,.95), rgba(160,60,140,.9));
+            color: #fff;
+            border-color: rgba(180,130,255,.5);
+            box-shadow: 0 6px 24px rgba(100,50,200,.35);
+        }
+        .ap-cta:hover {
+            background: linear-gradient(135deg, rgba(140,100,255,.98), rgba(175,70,155,.95));
+            filter: none;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(100,50,200,.45);
+        }
+        .ap-cta svg { color: #fff; }
+
+        .ap-hero {
+            background: linear-gradient(145deg, rgba(122,85,255,.18), rgba(30,11,66,.6));
+            border-color: rgba(180,130,255,.3);
+            grid-template-columns: 140px 1fr 260px;
+            align-items: center;
+        }
+
+        /* ── Variant B: hero + draw in one card ── */
+        .ap-hero-draw {
+            background: linear-gradient(145deg, rgba(122,85,255,.18), rgba(30,11,66,.6));
+            border: 1px solid rgba(180,130,255,.3);
+            border-radius: 28px;
+            padding: 44px 40px 36px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0,0,0,.22);
+        }
+        .ap-hero-draw::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
+        }
+        .ap-hd-top {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 36px;
+            align-items: center;
+        }
+        .ap-hd-bottom {
+            border-top: 1px solid rgba(180,130,255,.18);
+            margin-top: 32px;
+            padding-top: 28px;
+        }
+        .ap-hd-label {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .ap-hd-label span:first-child {
+            font-size: 15px;
+            font-weight: 600;
+            color: rgba(255,255,255,.75);
+            letter-spacing: .3px;
+        }
+        .ap-hd-hint {
+            font-size: 12px;
+            color: rgba(255,208,96,.55);
+            letter-spacing: .5px;
+        }
+        .ap-hero-draw .tc-deck {
+            justify-content: flex-start;
+        }
+
+        /* About strip inside hero — spans all 3 columns */
+        .ap-hero-about {
+            grid-column: 1 / -1;
+            border-top: 1px solid rgba(180,130,255,.18);
+            padding-top: 28px;
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .ap-hero::after {
+            content: "✦";
+            position: absolute;
+            top: 20px;
+            right: 28px;
+            font-size: 18px;
+            color: rgba(255,208,96,.3);
+            pointer-events: none;
+        }
+
+        /* ── Hero visual: floating tarot cards ── */
+        .ap-hero-visual {
+            position: relative;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ambient glow behind cards */
+        .hv-glow {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(122,85,255,.28) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Float wrappers — handle vertical movement only */
+        @keyframes hv-float {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-14px); }
+        }
+
+        .hv-float {
+            position: absolute;
+            animation: hv-float 5.5s ease-in-out infinite;
+        }
+        .hv-f1 { animation-delay: 0s; }
+        .hv-f2 { animation-delay: -1.8s; }
+        .hv-f3 { animation-delay: -3.6s; }
+
+        /* Card base */
+        .hv-card {
+            width: 88px;
+            height: 142px;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 18px 48px rgba(0,0,0,.6), 0 4px 12px rgba(0,0,0,.4);
+        }
+
+        /* inner border ornament */
+        .hv-card::before {
+            content: "";
+            position: absolute;
+            inset: 6px;
+            border-radius: 9px;
+            border: 1px solid rgba(255,255,255,.12);
+            pointer-events: none;
+        }
+
+        /* Card fan positions & colors */
+        .hv-c1 {
+            background: linear-gradient(160deg, #140834, #2a0d60);
+            border: 1px solid rgba(180,130,255,.5);
+            transform: rotate(-16deg) translate(-50px, 10px);
+            z-index: 1;
+        }
+        .hv-c2 {
+            background: linear-gradient(160deg, #1a0b40, #38177a);
+            border: 1px solid rgba(255,208,96,.5);
+            transform: rotate(3deg) translateY(-8px);
+            z-index: 3;
+        }
+        .hv-c3 {
+            background: linear-gradient(160deg, #20083c, #461570);
+            border: 1px solid rgba(200,100,220,.5);
+            transform: rotate(16deg) translate(50px, 6px);
+            z-index: 2;
+        }
+
+        /* Symbols */
+        .hv-symbol {
+            font-size: 30px;
+            line-height: 1;
+        }
+        .hv-c1 .hv-symbol { color: rgba(180,130,255,.95); filter: drop-shadow(0 0 10px rgba(180,130,255,.7)); }
+        .hv-c2 .hv-symbol { color: #FFD060;               filter: drop-shadow(0 0 12px rgba(255,208,96,.8)); }
+        .hv-c3 .hv-symbol { color: rgba(220,130,255,.95); filter: drop-shadow(0 0 10px rgba(200,80,255,.65)); }
+
+        .hv-name {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.45);
+        }
+
+        /* Tiny sparkles */
+        @keyframes hv-spark {
+            0%, 100% { opacity: .15; transform: scale(.9); }
+            50%       { opacity: .8;  transform: scale(1.2); }
+        }
+
+        .hv-spark {
+            position: absolute;
+            pointer-events: none;
+            animation: hv-spark 3.2s ease-in-out infinite;
+        }
+        .hv-spark.s1 { top: 10%;  left: 4%;   font-size: 11px; color: #FFD060;              animation-delay: 0s; }
+        .hv-spark.s2 { top: 22%;  right: 6%;  font-size: 7px;  color: rgba(180,130,255,.9); animation-delay: -.9s; }
+        .hv-spark.s3 { bottom: 18%; left: 10%; font-size: 9px;  color: #FFD060;              animation-delay: -1.8s; }
+        .hv-spark.s4 { bottom: 28%; right: 4%; font-size: 6px;  color: rgba(220,160,255,.8); animation-delay: -2.7s; }
+
+        /* Hide visual on narrow screens */
+        @media (max-width: 900px) {
+            .ap-hero { grid-template-columns: 140px 1fr !important; }
+            .ap-hero-visual { display: none; }
+        }
+        @media (max-width: 560px) {
+            .ap-hero { grid-template-columns: 1fr !important; }
+        }
+        /* ══════════════════════════════════════════════
+           COHESION — unified tarot palette across all sections
+           ══════════════════════════════════════════════ */
+
+        /* Feature cards → tarot palette + overflow for visual bleed */
+        .ap-feature {
+            background: linear-gradient(160deg, rgba(52,16,96,.6), rgba(26,8,58,.55));
+            border-color: rgba(140,90,220,.25);
+            overflow: hidden;
+            padding: 0;
+        }
+        .ap-feature:hover {
+            border-color: rgba(165,115,245,.4);
+            transform: translateY(-4px);
+        }
+
+        /* Visual header — illustration zone */
+        .ap-feat-visual {
+            height: 118px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Subtle crosshatch pattern overlay */
+        .ap-feat-visual::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient( 45deg, transparent, transparent 9px, rgba(255,255,255,.04) 9px, rgba(255,255,255,.04) 10px),
+                repeating-linear-gradient(-45deg, transparent, transparent 9px, rgba(255,255,255,.04) 9px, rgba(255,255,255,.04) 10px);
+        }
+        /* Shimmer line at bottom of visual */
+        .ap-feat-visual::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+        }
+        /* Roman numeral */
+        .ap-feat-num {
+            position: absolute;
+            top: 10px;
+            right: 13px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,.18);
+            font-family: Georgia, serif;
+        }
+        /* Large glyph */
+        .ap-feat-glyph {
+            font-size: 44px;
+            line-height: 1;
+            filter: drop-shadow(0 0 16px currentColor);
+            transition: transform .3s ease, filter .3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .ap-feature:hover .ap-feat-glyph {
+            transform: scale(1.22) translateY(-4px);
+            filter: drop-shadow(0 0 28px currentColor);
+        }
+        /* ── Feature strip (vertical stacked layout) ── */
+        .ap-feat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .ap-feat-strip {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid rgba(140,90,220,.25);
+            background: linear-gradient(160deg, rgba(52,16,96,.58), rgba(26,8,58,.52));
+            min-height: 148px;
+            transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+        }
+        .ap-feat-strip:hover {
+            transform: translateX(5px);
+            border-color: rgba(165,115,245,.42);
+            box-shadow: 0 8px 32px rgba(0,0,0,.3);
+        }
+        /* Even strips: flip visual to right */
+        .ap-feat-strip:nth-child(even) {
+            grid-template-columns: 1fr 220px;
+        }
+        .ap-feat-strip:nth-child(even) .ap-feat-strip-vis {
+            order: 2;
+        }
+        .ap-feat-strip:nth-child(even):hover {
+            transform: translateX(-5px);
+        }
+
+        .ap-feat-strip-vis {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        /* crosshatch */
+        .ap-feat-strip-vis::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient( 45deg, transparent, transparent 9px, rgba(255,255,255,.04) 9px, rgba(255,255,255,.04) 10px),
+                repeating-linear-gradient(-45deg, transparent, transparent 9px, rgba(255,255,255,.04) 9px, rgba(255,255,255,.04) 10px);
+        }
+        /* vertical separator line */
+        .ap-feat-strip-vis::after {
+            content: "";
+            position: absolute;
+            right: 0; top: 20px; bottom: 20px;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(180,130,255,.3), transparent);
+        }
+        .ap-feat-strip:nth-child(even) .ap-feat-strip-vis::after {
+            right: auto; left: 0;
+        }
+
+        .ap-feat-strip .ap-feat-glyph {
+            font-size: 52px;
+        }
+        .ap-feat-strip:hover .ap-feat-glyph {
+            transform: scale(1.18) translateY(-3px);
+            filter: drop-shadow(0 0 28px currentColor);
+        }
+
+        .ap-feat-strip-body {
+            padding: 28px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+        }
+        /* Grid cards: restore padding (card itself has padding:0 for visual bleed) */
+        .ap-features-grid .ap-feat-title {
+            padding: 16px 20px 0;
+        }
+        .ap-features-grid .ap-feat-body {
+            padding: 6px 20px 20px;
+        }
+
+        .ap-feat-strip-body .ap-feat-title {
+            font-size: 17px;
+        }
+
+        /* ── Review cards — alive ── */
+        .ap-review {
+            background: linear-gradient(160deg, rgba(40,12,80,.58), rgba(20,7,50,.5));
+            border-color: rgba(140,90,220,.22);
+            position: relative;
+            overflow: hidden;
+            transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+        }
+
+        /* Large decorative background quote mark */
+        .ap-review::before {
+            content: "\201C";
+            position: absolute;
+            top: -18px;
+            right: 14px;
+            font-size: 140px;
+            line-height: 1;
+            color: rgba(180,130,255,.07);
+            font-family: Georgia, serif;
+            pointer-events: none;
+        }
+
+        /* Per-card top accent line */
+        .ap-review:nth-child(1)::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, rgba(224,75,122,.75), rgba(123,92,255,.4), transparent);
+        }
+        .ap-review:nth-child(2)::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, rgba(200,75,158,.75), rgba(224,75,122,.4), transparent);
+        }
+        .ap-review:nth-child(3)::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, rgba(123,92,255,.75), rgba(74,127,160,.4), transparent);
+        }
+
+        /* Keep children above pseudo-elements */
+        .ap-review > * { position: relative; z-index: 1; }
+
+        /* Bigger glowing stars */
+        .ap-review-stars {
+            font-size: 18px !important;
+            letter-spacing: 3px;
+            filter: drop-shadow(0 0 6px rgba(255,208,96,.4));
+        }
+
+        /* Italic quote text */
+        .ap-review-text {
+            font-size: 15px !important;
+            font-style: italic;
+            color: rgba(255,255,255,.86) !important;
+            line-height: 1.68 !important;
+        }
+
+        /* Bigger avatar with glow ring */
+        .ap-review-avatar {
+            width: 42px !important;
+            height: 42px !important;
+            font-size: 16px !important;
+            box-shadow: 0 0 0 2px rgba(255,255,255,.15), 0 4px 14px rgba(0,0,0,.35);
+        }
+
+        .ap-review:hover {
+            transform: translateY(-5px);
+            border-color: rgba(165,115,245,.42);
+            box-shadow: 0 16px 44px rgba(0,0,0,.32);
+        }
+        .ap-review:hover .ap-review-stars {
+            filter: drop-shadow(0 0 12px rgba(255,208,96,.7));
+        }
+
+        /* Download CTA → richer purple gradient */
+        .ap-download {
+            background: linear-gradient(135deg, rgba(100,55,200,.32), rgba(160,50,130,.24));
+            border-color: rgba(180,130,255,.3);
+        }
+
+        /* Section headings — subtle gold ✦ accent */
+        .section-head h2::after {
+            content: " ✦";
+            color: rgba(255,208,96,.3);
+            font-size: 0.5em;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        /* About section — proper card */
+        .ap-about-card {
+            background: linear-gradient(160deg, rgba(52,16,96,.52), rgba(26,8,58,.48));
+            border: 1px solid rgba(180,130,255,.24);
+            border-radius: 24px;
+            padding: 36px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .ap-about-card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(180,130,255,.45), transparent);
+        }
+        .ap-about-ornament {
+            font-size: 28px;
+            color: rgba(255,208,96,.28);
+            line-height: 1;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 0 10px rgba(255,208,96,.18));
+        }
+        .ap-about-text {
+            font-size: 18px;
+            line-height: 1.72;
+            color: rgba(255,255,255,.85);
+            margin: 0 0 24px;
+            max-width: 68ch;
+            position: relative;
+            padding-left: 16px;
+        }
+        .ap-about-text::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 2px;
+            border-radius: 2px;
+            background: linear-gradient(180deg,
+                rgba(255,208,96,.65),
+                rgba(180,130,255,.5),
+                transparent
+            );
+        }
+        .ap-about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .ap-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 15px;
+            border-radius: 100px;
+            background: rgba(122,85,255,.18);
+            border: 1px solid rgba(180,130,255,.28);
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255,255,255,.75);
+            letter-spacing: .3px;
+        }
+
+        /* Dividers — more generous vertical spacing */
+        .tarot-divider {
+            margin: 20px 0;
+        }
+
+        /* ── Page ornament — bottom-right spiritual decoration ── */
+        .page-ornament {
+            position: fixed;
+            bottom: -30px;
+            right: -30px;
+            pointer-events: none;
+            z-index: 0;
+            animation: po-drift 14s ease-in-out infinite;
+        }
+
+        @keyframes po-drift {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-22px); }
+        }
+
+        /* Individual star twinkle */
+        .po-star { animation: po-twinkle 4s ease-in-out infinite; }
+        .po-s1 { animation-delay: 0s; }
+        .po-s2 { animation-delay: -1.3s; }
+        .po-s3 { animation-delay: -2.6s; }
+        .po-s4 { animation-delay: -0.8s; }
+        .po-s5 { animation-delay: -2s; }
+
+        @keyframes po-twinkle {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.3; }
+        }
+
+        /* Strips: stack on mobile */
+        @media (max-width: 600px) {
+            .ap-feat-strip,
+            .ap-feat-strip:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+            .ap-feat-strip-vis {
+                height: 100px;
+                order: 0 !important;
+            }
+            .ap-feat-strip:nth-child(even) .ap-feat-strip-vis::after {
+                right: 0; left: auto;
+                top: auto; bottom: 0;
+                width: auto; height: 1px;
+            }
+        }
+
+        /* Hide ornament on narrow screens */
+        @media (max-width: 600px) {
+            .page-ornament { display: none; }
+        }
+
+        /* Responsive: hide visual on narrow screens */
+        @media (max-width: 860px) {
+            .ap-hero { grid-template-columns: 1fr; }
+            .ap-hero-visual { display: none; }
+        }
+
+        /* ── VARIANT C — full-width dark immersive zone ── */
+        .ap-draw-fw {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            margin-left: -50vw;
+            background: linear-gradient(160deg,
+                rgba(30, 8, 75, .82) 0%,
+                rgba(60, 15, 110, .88) 35%,
+                rgba(100, 25, 90, .80) 65%,
+                rgba(30, 8, 75, .82) 100%);
+            backdrop-filter: blur(0px);
+            padding: 80px 40px;
+            overflow: hidden;
+        }
+
+        .ap-draw-fw::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(200,150,255,.45), rgba(255,180,200,.3), transparent);
+        }
+
+        .ap-draw-fw::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(200,150,255,.45), rgba(255,180,200,.3), transparent);
+        }
+
+        .ap-draw-fw-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ap-draw-fw-head {
+            text-align: center;
+            margin-bottom: 44px;
+        }
+
+        .ap-draw-fw-head h2 {
+            font-size: clamp(26px, 4vw, 40px);
+            font-weight: 700;
+            margin: 0 0 10px;
+            letter-spacing: -.5px;
+        }
+
+        .ap-draw-fw-head p {
+            font-size: 16px;
+            color: rgba(255,255,255,.55);
+            margin: 0;
+        }
+
+        .ap-fw-kicker {
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: rgba(255,208,96,.5);
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        /* scattered sparkles */
+        .ap-fw-spark {
+            position: absolute;
+            font-size: 18px;
+            animation: po-twinkle 4s ease-in-out infinite;
+            user-select: none;
+            pointer-events: none;
+        }
+        .ap-fw-spark.s1 { top: 12%; left: 8%;  animation-delay: 0s;   font-size: 22px; color: rgba(255,208,96,.30); }
+        .ap-fw-spark.s2 { top: 28%; left: 18%; animation-delay: 1.3s; font-size: 14px; color: rgba(255,160,200,.25); }
+        .ap-fw-spark.s3 { top: 60%; left: 6%;  animation-delay: 2.1s;                  color: rgba(200,150,255,.28); }
+        .ap-fw-spark.s4 { top: 80%; left: 22%; animation-delay: 0.7s; font-size: 12px; color: rgba(255,208,96,.22); }
+        .ap-fw-spark.s5 { top: 15%; right: 9%; animation-delay: 1.8s; font-size: 20px; color: rgba(255,160,200,.28); }
+        .ap-fw-spark.s6 { top: 45%; right: 5%; animation-delay: 0.4s; font-size: 14px; color: rgba(200,150,255,.25); }
+        .ap-fw-spark.s7 { top: 70%; right: 16%;animation-delay: 2.6s;                  color: rgba(255,208,96,.28); }
+        .ap-fw-spark.s8 { top: 88%; right: 28%;animation-delay: 1.1s; font-size: 12px; color: rgba(255,160,200,.22); }
+
+        @media (max-width: 600px) {
+            .ap-draw-fw { padding: 56px 20px; }
+            .ap-fw-spark { display: none; }
+        }
+
+        /* ── VARIANT: full-width hero zone ── */
+        .ap-hero-fw {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            margin-left: -50vw;
+            background: linear-gradient(150deg,
+                rgba(25, 6, 65, .92) 0%,
+                rgba(55, 12, 105, .95) 30%,
+                rgba(110, 22, 88, .88) 60%,
+                rgba(25, 6, 65, .92) 100%);
+            padding: 72px 40px 80px;
+            overflow: hidden;
+        }
+
+        .ap-hero-fw::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(200,150,255,.4), rgba(255,180,200,.25), transparent);
+        }
+
+        /* subtle radial glow top-left */
+        .ap-hero-fw::before {
+            content: "";
+            position: absolute;
+            top: -80px; left: -80px;
+            width: 480px; height: 480px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(122,85,255,.18), transparent 65%);
+            pointer-events: none;
+        }
+
+        .ap-hero-fw-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ap-hfw-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ap-hfw-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 22px;
+            box-shadow: 0 12px 36px rgba(0,0,0,.45);
+            flex: 0 0 auto;
+        }
+
+        .ap-hfw-icon img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+        }
+
+        .ap-hfw-info .ap-title { margin-top: 6px; }
+        .ap-hfw-info .ap-tagline { margin-bottom: 20px; }
+        .ap-hfw-info .ap-rating { margin-bottom: 28px; }
+
+        .ap-hfw-cards {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .ap-hfw-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: rgba(255,208,96,.5);
+            text-transform: uppercase;
+        }
+
+        .ap-hfw-deck {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 720px) {
+            .ap-hero-fw { padding: 52px 24px 60px; }
+            .ap-hero-fw-inner {
+                grid-template-columns: 1fr;
+                gap: 44px;
+            }
+            .ap-hfw-cards { align-items: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+
+    <header>
+        <div class="nav">
+            <a class="brand" href="../index1.html" aria-label="Noks Home">
+                <div class="brand-badge" aria-hidden="true"><span>N</span></div>
+                <div>
+                    <div class="brand-title">Noks</div>
+                    <span class="brand-sub">Studio</span>
+                </div>
+            </a>
+            <nav class="nav-links" aria-label="Primary">
+                <a class="pill" href="../index1.html#apps">← All Apps</a>
+                <a class="pill pill-accent" href="../index1.html#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap">
+
+        <!-- VARIANT: full-width hero zone -->
+        <div class="ap-hero-fw">
+            <span class="ap-fw-spark s1">✦</span>
+            <span class="ap-fw-spark s2">✧</span>
+            <span class="ap-fw-spark s3">✦</span>
+            <span class="ap-fw-spark s4">✧</span>
+            <span class="ap-fw-spark s5">✦</span>
+            <span class="ap-fw-spark s6">✧</span>
+            <span class="ap-fw-spark s7">✦</span>
+            <span class="ap-fw-spark s8">✧</span>
+
+            <div class="ap-hero-fw-inner">
+                <!-- Left: app info -->
+                <div class="ap-hfw-info reveal" data-reveal="up">
+                    <div class="ap-hfw-icon">
+                        <img src="https://play-lh.googleusercontent.com/IqECM4U8X0Y88V0mk6r08UomMa3ugB108qfTREu8RhCHYQu3W3uheyWqx96kErUZgQ=w480-h960-rw" alt="Daily Tarot app icon">
+                    </div>
+                    <div class="kicker"><span class="dot"></span>Lifestyle &nbsp;·&nbsp; Free</div>
+                    <h1 class="ap-title">Daily Tarot</h1>
+                    <p class="ap-tagline">Gentle card readings and calm reflections — every single day.</p>
+                    <div class="ap-rating">
+                        <span class="ap-stars">★★★★★</span>
+                        <span class="ap-rating-val">5.0</span>
+                        <span class="ap-rating-label">· 100K+ downloads</span>
+                    </div>
+                    <a class="btn btn-primary ap-cta"
+                        href="https://play.google.com/store/apps/details?id=com.noksdevelopment.dailytarot&utm_source=noks_website&utm_medium=app_page&utm_campaign=daily_tarot"
+                        target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:0 0 auto">
+                            <path d="M3.6 3.2c-.4.3-.6.8-.6 1.4v14.8c0 .6.2 1.1.6 1.4l.1.1 8.3-8.3v-.2L3.6 3.2z" fill="currentColor" />
+                            <path d="M15 14.5l-2.8-2.8v-.2l2.8-2.8.1.1 3.3 1.9c.9.5.9 1.4 0 2l-3.3 1.9-.1-.1z" fill="currentColor" />
+                            <path d="M15.1 14.4L12 11.3 3.6 19.7c.3.3.8.4 1.4.1l10.1-5.4" fill="currentColor" />
+                            <path d="M15.1 8.2L5 2.8c-.6-.3-1.1-.2-1.4.1L12 11.3l3.1-3.1z" fill="currentColor" />
+                        </svg>
+                        Get it on Google Play
+                    </a>
+                </div>
+
+                <!-- Right: tap cards -->
+                <div class="ap-hfw-cards reveal" data-reveal="up">
+                    <div class="ap-hfw-label">✦ &nbsp; Tap to draw your card &nbsp; ✦</div>
+                    <div class="tc-deck ap-hfw-deck">
+                        <div class="tc" onclick="this.classList.toggle('flipped')" aria-label="Draw The Fool">
+                            <div class="tc-inner">
+                                <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                                <div class="tc-back">
+                                    <div class="tc-card-symbol">🌟</div>
+                                    <div class="tc-card-name">The Fool</div>
+                                    <div class="tc-card-msg">Begin with a brave, open heart.</div>
+                                    <div class="tc-card-hint">Explore in app ↗</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tc" onclick="this.classList.toggle('flipped')" aria-label="Draw The High Priestess">
+                            <div class="tc-inner">
+                                <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                                <div class="tc-back">
+                                    <div class="tc-card-symbol">🔮</div>
+                                    <div class="tc-card-name">High Priestess</div>
+                                    <div class="tc-card-msg">Your intuition holds the answer.</div>
+                                    <div class="tc-card-hint">Explore in app ↗</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tc" onclick="this.classList.toggle('flipped')" aria-label="Draw The Star">
+                            <div class="tc-inner">
+                                <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                                <div class="tc-back">
+                                    <div class="tc-card-symbol">⭐</div>
+                                    <div class="tc-card-name">The Star</div>
+                                    <div class="tc-card-msg">Hope is returning. Let it in.</div>
+                                    <div class="tc-card-hint">Explore in app ↗</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tc" onclick="this.classList.toggle('flipped')" aria-label="Draw The Moon">
+                            <div class="tc-inner">
+                                <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                                <div class="tc-back">
+                                    <div class="tc-card-symbol">🌙</div>
+                                    <div class="tc-card-name">The Moon</div>
+                                    <div class="tc-card-msg">Trust what stirs beneath the surface.</div>
+                                    <div class="tc-card-hint">Explore in app ↗</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tc" onclick="this.classList.toggle('flipped')" aria-label="Draw The Sun">
+                            <div class="tc-inner">
+                                <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                                <div class="tc-back">
+                                    <div class="tc-card-symbol">☀</div>
+                                    <div class="tc-card-name">The Sun</div>
+                                    <div class="tc-card-msg">Step into the light with confidence.</div>
+                                    <div class="tc-card-hint">Explore in app ↗</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HERO -->
+        <div class="ap-hero reveal">
+            <div class="ap-hero-icon">
+                <img src="https://play-lh.googleusercontent.com/IqECM4U8X0Y88V0mk6r08UomMa3ugB108qfTREu8RhCHYQu3W3uheyWqx96kErUZgQ=w480-h960-rw" alt="Daily Tarot app icon">
+            </div>
+            <div class="ap-hero-body">
+                <div class="kicker"><span class="dot"></span>Lifestyle &nbsp;·&nbsp; Free</div>
+                <h1 class="ap-title">Daily Tarot</h1>
+                <p class="ap-tagline">Gentle card readings and calm reflections — every single day.</p>
+                <div class="ap-rating">
+                    <span class="ap-stars">★★★★★</span>
+                    <span class="ap-rating-val">5.0</span>
+                    <span class="ap-rating-label">· 100K+ downloads</span>
+                </div>
+                <a class="btn btn-primary ap-cta"
+                    href="https://play.google.com/store/apps/details?id=com.noksdevelopment.dailytarot&utm_source=noks_website&utm_medium=app_page&utm_campaign=daily_tarot"
+                    target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:0 0 auto">
+                        <path d="M3.6 3.2c-.4.3-.6.8-.6 1.4v14.8c0 .6.2 1.1.6 1.4l.1.1 8.3-8.3v-.2L3.6 3.2z" fill="currentColor" />
+                        <path d="M15 14.5l-2.8-2.8v-.2l2.8-2.8.1.1 3.3 1.9c.9.5.9 1.4 0 2l-3.3 1.9-.1-.1z" fill="currentColor" />
+                        <path d="M15.1 14.4L12 11.3 3.6 19.7c.3.3.8.4 1.4.1l10.1-5.4" fill="currentColor" />
+                        <path d="M15.1 8.2L5 2.8c-.6-.3-1.1-.2-1.4.1L12 11.3l3.1-3.1z" fill="currentColor" />
+                    </svg>
+                    Get it on Google Play
+                </a>
+            </div>
+
+            <!-- Animated tarot cards visual -->
+            <div class="ap-hero-visual" aria-hidden="true">
+                <div class="hv-glow"></div>
+
+                <div class="hv-float hv-f1">
+                    <div class="hv-card hv-c1">
+                        <div class="hv-symbol">☽</div>
+                        <div class="hv-name">The Moon</div>
+                    </div>
+                </div>
+
+                <div class="hv-float hv-f2">
+                    <div class="hv-card hv-c2">
+                        <div class="hv-symbol">★</div>
+                        <div class="hv-name">The Star</div>
+                    </div>
+                </div>
+
+                <div class="hv-float hv-f3">
+                    <div class="hv-card hv-c3">
+                        <div class="hv-symbol">✦</div>
+                        <div class="hv-name">The Fool</div>
+                    </div>
+                </div>
+
+                <span class="hv-spark s1">✦</span>
+                <span class="hv-spark s2">✦</span>
+                <span class="hv-spark s3">✦</span>
+                <span class="hv-spark s4">✦</span>
+            </div>
+
+            <!-- About strip inside hero card -->
+            <div class="ap-hero-about">
+                <div class="ap-about-ornament" aria-hidden="true">✦</div>
+                <p class="ap-about-text">Daily Tarot is your personal guide to the cards — designed to feel calm, beautiful, and easy to use every day. Whether you're a beginner or experienced reader, the app offers a peaceful space for daily reflection and exploration.</p>
+                <div class="ap-about-tags">
+                    <span class="ap-tag">☽ Beginner-friendly</span>
+                    <span class="ap-tag">✦ 78 Cards</span>
+                    <span class="ap-tag">⊞ Multiple spreads</span>
+                    <span class="ap-tag">♡ Free</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- separator -->
+        <div class="tarot-divider reveal" data-reveal="fade">✦</div>
+
+        <!-- ABOUT -->
+        <section class="ap-about reveal" data-reveal="up">
+            <div class="ap-about-card">
+                <div class="ap-about-ornament" aria-hidden="true">✦</div>
+                <p class="ap-about-text">Daily Tarot is your personal guide to the cards — designed to feel calm, beautiful, and easy to use every day. Whether you're a beginner or experienced reader, the app offers a peaceful space for daily reflection and exploration.</p>
+                <div class="ap-about-tags">
+                    <span class="ap-tag">☽ Beginner-friendly</span>
+                    <span class="ap-tag">✦ 78 Cards</span>
+                    <span class="ap-tag">⊞ Multiple spreads</span>
+                    <span class="ap-tag">♡ Free</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- DRAW YOUR CARD -->
+        <section class="ap-draw">
+            <div class="section-head reveal" data-reveal="up">
+                <h2>Draw your card</h2>
+                <p class="ap-draw-intro">Tap a card and receive a message for today ✦</p>
+            </div>
+
+            <div class="tc-deck" data-stagger>
+                <!-- Card 1: The Fool -->
+                <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Fool">
+                    <div class="tc-inner">
+                        <div class="tc-front">
+                            <div class="tc-front-symbol">✦</div>
+                            <div class="tc-front-label">Tap to reveal</div>
+                        </div>
+                        <div class="tc-back">
+                            <div class="tc-card-symbol">☽</div>
+                            <div class="tc-card-name">The Fool</div>
+                            <div class="tc-card-msg">A new adventure begins. Trust the leap — the universe has your back.</div>
+                            <div class="tc-card-hint">Explore all 78 cards in the app ↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: The Star -->
+                <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Star">
+                    <div class="tc-inner">
+                        <div class="tc-front">
+                            <div class="tc-front-symbol">✦</div>
+                            <div class="tc-front-label">Tap to reveal</div>
+                        </div>
+                        <div class="tc-back">
+                            <div class="tc-card-symbol">★</div>
+                            <div class="tc-card-name">The Star</div>
+                            <div class="tc-card-msg">Hope and renewal are flowing toward you. Rest, and let yourself shine.</div>
+                            <div class="tc-card-hint">Explore all 78 cards in the app ↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: The Moon -->
+                <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Moon">
+                    <div class="tc-inner">
+                        <div class="tc-front">
+                            <div class="tc-front-symbol">✦</div>
+                            <div class="tc-front-label">Tap to reveal</div>
+                        </div>
+                        <div class="tc-back">
+                            <div class="tc-card-symbol">🌙</div>
+                            <div class="tc-card-name">The Moon</div>
+                            <div class="tc-card-msg">Your intuition sees clearly. Trust what stirs beneath the surface.</div>
+                            <div class="tc-card-hint">Explore all 78 cards in the app ↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: The Sun -->
+                <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Sun">
+                    <div class="tc-inner">
+                        <div class="tc-front">
+                            <div class="tc-front-symbol">✦</div>
+                            <div class="tc-front-label">Tap to reveal</div>
+                        </div>
+                        <div class="tc-back">
+                            <div class="tc-card-symbol">☀</div>
+                            <div class="tc-card-name">The Sun</div>
+                            <div class="tc-card-msg">Clarity and joy are yours today. Step into the light with confidence.</div>
+                            <div class="tc-card-hint">Explore all 78 cards in the app ↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: The World -->
+                <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The World">
+                    <div class="tc-inner">
+                        <div class="tc-front">
+                            <div class="tc-front-symbol">✦</div>
+                            <div class="tc-front-label">Tap to reveal</div>
+                        </div>
+                        <div class="tc-back">
+                            <div class="tc-card-symbol">◎</div>
+                            <div class="tc-card-name">The World</div>
+                            <div class="tc-card-msg">A cycle completes with grace. Celebrate how far you've come.</div>
+                            <div class="tc-card-hint">Explore all 78 cards in the app ↗</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tarot-divider reveal" data-reveal="fade">✦ ✦ ✦</div>
+        </section>
+
+        <!-- separator -->
+        <div class="tarot-divider reveal" data-reveal="fade">✦</div>
+
+        <!-- VARIANT B — hero + draw cards in one card -->
+        <div class="ap-hero-draw reveal">
+            <!-- Hero top row -->
+            <div class="ap-hd-top">
+                <div class="ap-hero-icon">
+                    <img src="https://play-lh.googleusercontent.com/IqECM4U8X0Y88V0mk6r08UomMa3ugB108qfTREu8RhCHYQu3W3uheyWqx96kErUZgQ=w480-h960-rw" alt="Daily Tarot app icon">
+                </div>
+                <div class="ap-hero-body">
+                    <div class="kicker"><span class="dot"></span>Lifestyle &nbsp;·&nbsp; Free</div>
+                    <h2 class="ap-title">Daily Tarot</h2>
+                    <p class="ap-tagline">Gentle card readings and calm reflections — every single day.</p>
+                    <div class="ap-rating">
+                        <span class="ap-stars">★★★★★</span>
+                        <span class="ap-rating-val">5.0</span>
+                        <span class="ap-rating-label">· 100K+ downloads</span>
+                    </div>
+                    <a class="btn btn-primary ap-cta"
+                        href="https://play.google.com/store/apps/details?id=com.noksdevelopment.dailytarot&utm_source=noks_website&utm_medium=app_page&utm_campaign=daily_tarot"
+                        target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:0 0 auto">
+                            <path d="M3.6 3.2c-.4.3-.6.8-.6 1.4v14.8c0 .6.2 1.1.6 1.4l.1.1 8.3-8.3v-.2L3.6 3.2z" fill="currentColor" />
+                            <path d="M15 14.5l-2.8-2.8v-.2l2.8-2.8.1.1 3.3 1.9c.9.5.9 1.4 0 2l-3.3 1.9-.1-.1z" fill="currentColor" />
+                            <path d="M15.1 14.4L12 11.3 3.6 19.7c.3.3.8.4 1.4.1l10.1-5.4" fill="currentColor" />
+                            <path d="M15.1 8.2L5 2.8c-.6-.3-1.1-.2-1.4.1L12 11.3l3.1-3.1z" fill="currentColor" />
+                        </svg>
+                        Get it on Google Play
+                    </a>
+                </div>
+            </div>
+
+            <!-- Draw cards bottom row -->
+            <div class="ap-hd-bottom">
+                <div class="ap-hd-label">
+                    <span>Draw your card for today</span>
+                    <span class="ap-hd-hint">Tap to reveal ✦</span>
+                </div>
+                <div class="tc-deck" data-stagger>
+                    <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Fool">
+                        <div class="tc-inner">
+                            <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                            <div class="tc-back">
+                                <div class="tc-card-symbol">☽</div>
+                                <div class="tc-card-name">The Fool</div>
+                                <div class="tc-card-msg">A new adventure begins. Trust the leap.</div>
+                                <div class="tc-card-hint">Explore in app ↗</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Star">
+                        <div class="tc-inner">
+                            <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                            <div class="tc-back">
+                                <div class="tc-card-symbol">★</div>
+                                <div class="tc-card-name">The Star</div>
+                                <div class="tc-card-msg">Hope and renewal are flowing toward you.</div>
+                                <div class="tc-card-hint">Explore in app ↗</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Moon">
+                        <div class="tc-inner">
+                            <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                            <div class="tc-back">
+                                <div class="tc-card-symbol">🌙</div>
+                                <div class="tc-card-name">The Moon</div>
+                                <div class="tc-card-msg">Trust what stirs beneath the surface.</div>
+                                <div class="tc-card-hint">Explore in app ↗</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Sun">
+                        <div class="tc-inner">
+                            <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                            <div class="tc-back">
+                                <div class="tc-card-symbol">☀</div>
+                                <div class="tc-card-name">The Sun</div>
+                                <div class="tc-card-msg">Step into the light with confidence.</div>
+                                <div class="tc-card-hint">Explore in app ↗</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The World">
+                        <div class="tc-inner">
+                            <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                            <div class="tc-back">
+                                <div class="tc-card-symbol">◎</div>
+                                <div class="tc-card-name">The World</div>
+                                <div class="tc-card-msg">Celebrate how far you've come.</div>
+                                <div class="tc-card-hint">Explore in app ↗</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- separator -->
+        <div class="tarot-divider reveal" data-reveal="fade">✦</div>
+
+        <!-- VARIANT C — full-width immersive dark zone -->
+        <div class="ap-draw-fw">
+            <!-- scattered sparkles -->
+            <span class="ap-fw-spark s1">✦</span>
+            <span class="ap-fw-spark s2">✧</span>
+            <span class="ap-fw-spark s3">✦</span>
+            <span class="ap-fw-spark s4">✧</span>
+            <span class="ap-fw-spark s5">✦</span>
+            <span class="ap-fw-spark s6">✧</span>
+            <span class="ap-fw-spark s7">✦</span>
+            <span class="ap-fw-spark s8">✧</span>
+
+            <div class="ap-draw-fw-inner">
+                <div class="ap-draw-fw-head reveal" data-reveal="up">
+                    <div class="ap-fw-kicker">✦ &nbsp; Daily Practice &nbsp; ✦</div>
+                    <h2>Draw your card</h2>
+                    <p>Tap a card and receive a message for today</p>
+                </div>
+
+                <div class="tc-deck" data-stagger>
+                    <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Fool">
+                        <div class="tc-inner">
+                            <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                            <div class="tc-back">
+                                <div class="tc-card-symbol">🌟</div>
+                                <div class="tc-card-name">The Fool</div>
+                                <div class="tc-card-msg">Begin with a brave, open heart.</div>
+                                <div class="tc-card-hint">Explore in app ↗</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The High Priestess">
+                        <div class="tc-inner">
+                            <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                            <div class="tc-back">
+                                <div class="tc-card-symbol">🔮</div>
+                                <div class="tc-card-name">High Priestess</div>
+                                <div class="tc-card-msg">Your intuition holds the answer.</div>
+                                <div class="tc-card-hint">Explore in app ↗</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Star">
+                        <div class="tc-inner">
+                            <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                            <div class="tc-back">
+                                <div class="tc-card-symbol">⭐</div>
+                                <div class="tc-card-name">The Star</div>
+                                <div class="tc-card-msg">Hope is returning. Let it in.</div>
+                                <div class="tc-card-hint">Explore in app ↗</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Moon">
+                        <div class="tc-inner">
+                            <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                            <div class="tc-back">
+                                <div class="tc-card-symbol">🌙</div>
+                                <div class="tc-card-name">The Moon</div>
+                                <div class="tc-card-msg">Trust what stirs beneath the surface.</div>
+                                <div class="tc-card-hint">Explore in app ↗</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tc reveal" onclick="this.classList.toggle('flipped')" aria-label="Draw The Sun">
+                        <div class="tc-inner">
+                            <div class="tc-front"><div class="tc-front-symbol">✦</div><div class="tc-front-label">Tap</div></div>
+                            <div class="tc-back">
+                                <div class="tc-card-symbol">☀</div>
+                                <div class="tc-card-name">The Sun</div>
+                                <div class="tc-card-msg">Step into the light with confidence.</div>
+                                <div class="tc-card-hint">Explore in app ↗</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- separator -->
+        <div class="tarot-divider reveal" data-reveal="fade">✦</div>
+
+        <!-- FEATURES -->
+        <section class="ap-features">
+            <div class="section-head reveal" data-reveal="up">
+                <h2>What's inside</h2>
+            </div>
+            <div class="ap-features-grid" data-stagger>
+                <div class="ap-feature reveal">
+                    <div class="ap-feat-visual" style="background: linear-gradient(155deg, rgba(88,30,158,.8), rgba(32,8,78,.75))">
+                        <span class="ap-feat-num">I</span>
+                        <div class="ap-feat-glyph" style="color: rgba(190,145,255,.95)">☽</div>
+                    </div>
+                    <div class="ap-feat-title">Daily Card</div>
+                    <div class="ap-feat-body">Pull one card each morning for a gentle intention or reflection to carry through your day.</div>
+                </div>
+                <div class="ap-feature reveal">
+                    <div class="ap-feat-visual" style="background: linear-gradient(155deg, rgba(170,35,105,.78), rgba(75,8,65,.75))">
+                        <span class="ap-feat-num">II</span>
+                        <div class="ap-feat-glyph" style="color: rgba(255,130,190,.95)">✦</div>
+                    </div>
+                    <div class="ap-feat-title">Multiple Spreads</div>
+                    <div class="ap-feat-body">From a simple 3-card past-present-future to more complex layouts — with clear explanations for each position.</div>
+                </div>
+                <div class="ap-feature reveal">
+                    <div class="ap-feat-visual" style="background: linear-gradient(155deg, rgba(25,75,185,.78), rgba(10,30,115,.75))">
+                        <span class="ap-feat-num">III</span>
+                        <div class="ap-feat-glyph" style="color: rgba(110,190,255,.95)">◎</div>
+                    </div>
+                    <div class="ap-feat-title">Card Meanings</div>
+                    <div class="ap-feat-body">Detailed interpretations for all 78 cards — upright and reversed — so you always understand what you're reading.</div>
+                </div>
+                <div class="ap-feature reveal">
+                    <div class="ap-feat-visual" style="background: linear-gradient(155deg, rgba(145,85,10,.78), rgba(65,30,5,.75))">
+                        <span class="ap-feat-num">IV</span>
+                        <div class="ap-feat-glyph" style="color: rgba(255,208,96,.95)">✧</div>
+                    </div>
+                    <div class="ap-feat-title">Beautiful Design</div>
+                    <div class="ap-feat-body">A calm, minimal interface that makes reading feel like a ritual — not a chore. No ads cluttering the experience.</div>
+                </div>
+            </div>
+
+            <div class="ap-feat-list" data-stagger>
+                <div class="ap-feat-strip reveal">
+                    <div class="ap-feat-strip-vis" style="background: linear-gradient(155deg, rgba(88,30,158,.85), rgba(32,8,78,.8))">
+                        <span class="ap-feat-num">I</span>
+                        <div class="ap-feat-glyph" style="color: rgba(190,145,255,.95)">☽</div>
+                    </div>
+                    <div class="ap-feat-strip-body">
+                        <div class="ap-feat-title">Daily Card</div>
+                        <div class="ap-feat-body">Pull one card each morning for a gentle intention or reflection to carry through your day.</div>
+                    </div>
+                </div>
+                <div class="ap-feat-strip reveal">
+                    <div class="ap-feat-strip-vis" style="background: linear-gradient(155deg, rgba(170,35,105,.82), rgba(75,8,65,.8))">
+                        <span class="ap-feat-num">II</span>
+                        <div class="ap-feat-glyph" style="color: rgba(255,130,190,.95)">✦</div>
+                    </div>
+                    <div class="ap-feat-strip-body">
+                        <div class="ap-feat-title">Multiple Spreads</div>
+                        <div class="ap-feat-body">From a simple 3-card past-present-future to more complex layouts — with clear explanations for each position.</div>
+                    </div>
+                </div>
+                <div class="ap-feat-strip reveal">
+                    <div class="ap-feat-strip-vis" style="background: linear-gradient(155deg, rgba(25,75,185,.82), rgba(10,30,115,.8))">
+                        <span class="ap-feat-num">III</span>
+                        <div class="ap-feat-glyph" style="color: rgba(110,190,255,.95)">◎</div>
+                    </div>
+                    <div class="ap-feat-strip-body">
+                        <div class="ap-feat-title">Card Meanings</div>
+                        <div class="ap-feat-body">Detailed interpretations for all 78 cards — upright and reversed — so you always understand what you're reading.</div>
+                    </div>
+                </div>
+                <div class="ap-feat-strip reveal">
+                    <div class="ap-feat-strip-vis" style="background: linear-gradient(155deg, rgba(145,85,10,.82), rgba(65,30,5,.8))">
+                        <span class="ap-feat-num">IV</span>
+                        <div class="ap-feat-glyph" style="color: rgba(255,208,96,.95)">✧</div>
+                    </div>
+                    <div class="ap-feat-strip-body">
+                        <div class="ap-feat-title">Beautiful Design</div>
+                        <div class="ap-feat-body">A calm, minimal interface that makes reading feel like a ritual — not a chore. No ads cluttering the experience.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- separator -->
+        <div class="tarot-divider reveal" data-reveal="fade">✦</div>
+
+        <!-- REVIEWS -->
+        <section class="ap-reviews">
+            <div class="section-head reveal" data-reveal="up">
+                <h2>What users say</h2>
+            </div>
+            <div class="ap-reviews-grid" data-stagger>
+                <div class="ap-review reveal">
+                    <div class="ap-review-stars">★★★★★</div>
+                    <p class="ap-review-text">"A wonderful app for anyone wanting to explore tarot. The design is calm and beautiful — I use it every single morning as part of my ritual."</p>
+                    <div class="ap-review-author">
+                        <div class="ap-review-avatar" style="background: linear-gradient(135deg, #E04B7A, #7B5CFF)">A</div>
+                        <span class="ap-review-name">Anna</span>
+                    </div>
+                </div>
+                <div class="ap-review reveal">
+                    <div class="ap-review-stars">★★★★★</div>
+                    <p class="ap-review-text">"I love the variety of spreads and the detailed card meanings. It feels like having a personal tarot reader in your pocket. Truly magical!"</p>
+                    <div class="ap-review-author">
+                        <div class="ap-review-avatar" style="background: linear-gradient(135deg, #C84B9E, #E04B7A)">S</div>
+                        <span class="ap-review-name">Sophie</span>
+                    </div>
+                </div>
+                <div class="ap-review reveal">
+                    <div class="ap-review-stars">★★★★★</div>
+                    <p class="ap-review-text">"A cool app that will be especially interesting for those who want to delve deeper into tarot. The design is simple and user-friendly, with eye-pleasing colors."</p>
+                    <div class="ap-review-author">
+                        <div class="ap-review-avatar" style="background: linear-gradient(135deg, #7B5CFF, #4A7FA0)">M</div>
+                        <span class="ap-review-name">Maria</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOWNLOAD CTA -->
+        <section class="ap-download reveal" data-reveal="scale">
+            <h2 class="ap-dl-title">Ready to start your daily practice?</h2>
+            <p class="ap-dl-body">Free to download. No account required.</p>
+            <a class="btn btn-primary ap-cta"
+                href="https://play.google.com/store/apps/details?id=com.noksdevelopment.dailytarot&utm_source=noks_website&utm_medium=app_page_bottom&utm_campaign=daily_tarot"
+                target="_blank" rel="noopener">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:0 0 auto">
+                    <path d="M3.6 3.2c-.4.3-.6.8-.6 1.4v14.8c0 .6.2 1.1.6 1.4l.1.1 8.3-8.3v-.2L3.6 3.2z" fill="currentColor" />
+                    <path d="M15 14.5l-2.8-2.8v-.2l2.8-2.8.1.1 3.3 1.9c.9.5.9 1.4 0 2l-3.3 1.9-.1-.1z" fill="currentColor" />
+                    <path d="M15.1 14.4L12 11.3 3.6 19.7c.3.3.8.4 1.4.1l10.1-5.4" fill="currentColor" />
+                    <path d="M15.1 8.2L5 2.8c-.6-.3-1.1-.2-1.4.1L12 11.3l3.1-3.1z" fill="currentColor" />
+                </svg>
+                Get it on Google Play
+            </a>
+        </section>
+
+        <footer class="reveal">
+            <div class="foot">
+                <div class="small">© <span id="year"></span> Noks Studio. All rights reserved.</div>
+                <div class="small" style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+                    <a href="../index1.html#about">About</a>
+                    <a href="../index1.html#apps">Our Apps</a>
+                    <a href="../index1.html#contact">Contact</a>
+                    <a href="../privacy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Spiritual artifacts — bottom-right corner decoration -->
+    <div class="page-ornament" aria-hidden="true">
+        <svg width="680" height="500" viewBox="0 0 680 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="moon-halo" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="rgba(255,208,96,.1)"/>
+                    <stop offset="100%" stop-color="rgba(255,208,96,0)"/>
+                </radialGradient>
+            </defs>
+
+            <!-- Constellation lines — spanning wide left to right -->
+            <line x1="55"  y1="95"  x2="180" y2="60"  stroke="rgba(180,130,255,.18)" stroke-width="1" stroke-dasharray="4 6"/>
+            <line x1="180" y1="60"  x2="310" y2="105" stroke="rgba(180,130,255,.2)"  stroke-width="1" stroke-dasharray="4 6"/>
+            <line x1="310" y1="105" x2="430" y2="70"  stroke="rgba(180,130,255,.18)" stroke-width="1" stroke-dasharray="4 6"/>
+            <line x1="430" y1="70"  x2="540" y2="130" stroke="rgba(180,130,255,.17)" stroke-width="1" stroke-dasharray="4 6"/>
+            <line x1="310" y1="105" x2="285" y2="210" stroke="rgba(180,130,255,.13)" stroke-width="1" stroke-dasharray="4 6"/>
+            <line x1="540" y1="130" x2="500" y2="235" stroke="rgba(180,130,255,.13)" stroke-width="1" stroke-dasharray="4 6"/>
+
+            <!-- 4-pointed stars — spread across the full width -->
+            <g class="po-star po-s1" transform="translate(55,95)">
+                <path d="M0,-9 L1.8,-1.8 L9,0 L1.8,1.8 L0,9 L-1.8,1.8 L-9,0 L-1.8,-1.8 Z" fill="rgba(255,208,96,.55)"/>
+            </g>
+            <g class="po-star po-s2" transform="translate(180,60)">
+                <path d="M0,-11 L2.2,-2.2 L11,0 L2.2,2.2 L0,11 L-2.2,2.2 L-11,0 L-2.2,-2.2 Z" fill="rgba(255,208,96,.7)"/>
+            </g>
+            <g class="po-star po-s3" transform="translate(310,105)">
+                <path d="M0,-8 L1.6,-1.6 L8,0 L1.6,1.6 L0,8 L-1.6,1.6 L-8,0 L-1.6,-1.6 Z" fill="rgba(180,130,255,.65)"/>
+            </g>
+            <g class="po-star po-s4" transform="translate(430,70)">
+                <path d="M0,-10 L2,-2 L10,0 L2,2 L0,10 L-2,2 L-10,0 L-2,-2 Z" fill="rgba(255,208,96,.6)"/>
+            </g>
+            <g class="po-star po-s5" transform="translate(540,130)">
+                <path d="M0,-8 L1.6,-1.6 L8,0 L1.6,1.6 L0,8 L-1.6,1.6 L-8,0 L-1.6,-1.6 Z" fill="rgba(180,130,255,.6)"/>
+            </g>
+            <g class="po-star po-s1" transform="translate(285,210)">
+                <path d="M0,-6 L1.2,-1.2 L6,0 L1.2,1.2 L0,6 L-1.2,1.2 L-6,0 L-1.2,-1.2 Z" fill="rgba(255,255,255,.4)"/>
+            </g>
+            <g class="po-star po-s3" transform="translate(500,235)">
+                <path d="M0,-7 L1.4,-1.4 L7,0 L1.4,1.4 L0,7 L-1.4,1.4 L-7,0 L-1.4,-1.4 Z" fill="rgba(255,208,96,.45)"/>
+            </g>
+
+            <!-- Tiny ambient dots — upper area -->
+            <circle cx="105" cy="175" r="1.5" fill="rgba(255,255,255,.3)"/>
+            <circle cx="240" cy="145" r="1.5" fill="rgba(180,130,255,.4)"/>
+            <circle cx="380" cy="165" r="1"   fill="rgba(255,255,255,.28)"/>
+            <circle cx="470" cy="185" r="1.5" fill="rgba(255,208,96,.3)"/>
+            <circle cx="600" cy="95"  r="2"   fill="rgba(255,208,96,.32)"/>
+            <circle cx="625" cy="200" r="1.5" fill="rgba(255,255,255,.25)"/>
+
+            <!-- Stars + dots — lower area (footer zone) -->
+            <g class="po-star po-s2" transform="translate(120,320)">
+                <path d="M0,-7 L1.4,-1.4 L7,0 L1.4,1.4 L0,7 L-1.4,1.4 L-7,0 L-1.4,-1.4 Z" fill="rgba(255,208,96,.45)"/>
+            </g>
+            <g class="po-star po-s5" transform="translate(290,360)">
+                <path d="M0,-9 L1.8,-1.8 L9,0 L1.8,1.8 L0,9 L-1.8,1.8 L-9,0 L-1.8,-1.8 Z" fill="rgba(180,130,255,.5)"/>
+            </g>
+            <g class="po-star po-s1" transform="translate(430,310)">
+                <path d="M0,-6 L1.2,-1.2 L6,0 L1.2,1.2 L0,6 L-1.2,1.2 L-6,0 L-1.2,-1.2 Z" fill="rgba(255,208,96,.4)"/>
+            </g>
+            <g class="po-star po-s4" transform="translate(200,420)">
+                <path d="M0,-5 L1,-1 L5,0 L1,1 L0,5 L-1,1 L-5,0 L-1,-1 Z" fill="rgba(255,255,255,.35)"/>
+            </g>
+            <g class="po-star po-s3" transform="translate(370,440)">
+                <path d="M0,-7 L1.4,-1.4 L7,0 L1.4,1.4 L0,7 L-1.4,1.4 L-7,0 L-1.4,-1.4 Z" fill="rgba(255,208,96,.38)"/>
+            </g>
+
+            <circle cx="75"  cy="380" r="1.5" fill="rgba(180,130,255,.38)"/>
+            <circle cx="185" cy="340" r="1"   fill="rgba(255,208,96,.3)"/>
+            <circle cx="340" cy="300" r="1.5" fill="rgba(255,255,255,.28)"/>
+            <circle cx="470" cy="390" r="1"   fill="rgba(180,130,255,.35)"/>
+            <circle cx="150" cy="470" r="1.5" fill="rgba(255,208,96,.28)"/>
+            <circle cx="320" cy="480" r="1"   fill="rgba(255,255,255,.22)"/>
+            <circle cx="610" cy="310" r="1.5" fill="rgba(180,130,255,.3)"/>
+            <circle cx="490" cy="460" r="1"   fill="rgba(180,130,255,.28)"/>
+
+            <!-- Moon glow -->
+            <circle cx="555" cy="415" r="100" fill="url(#moon-halo)"/>
+
+            <!-- Crescent moon — thin sliver                                     -->
+            <!-- Outer: center(555,415) r=65 | Inner: center(565,415) r=63 d=10  -->
+            <!-- Intersection: P1=(573,353)  P2=(573,477)                        -->
+            <path d="M 573,353 A 65,65 0 1,0 573,477 A 63,63 0 0,1 573,353 Z"
+                fill="rgba(255,208,96,.18)"
+                stroke="rgba(255,208,96,.4)" stroke-width="1"/>
+        </svg>
+    </div>
+
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <script src="../assets/main.js"></script>
+</body>
+
+</html>

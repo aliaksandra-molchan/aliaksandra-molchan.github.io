@@ -1,0 +1,240 @@
+/* ================================================================
+   Daily Tarot — Google Play Screenshot  |  1080 × 1920 px
+   Preview scale: 0.45  →  486 × 864 px in browser
+   ================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --cw: 150px;
+    --ch: 225px;
+    --rs: 248px;
+    --cs: 172px;
+    --cc0: 188px;
+    --cc1: 360px;
+    --cc2: 532px;
+    --sx:  762px;
+    --row0: 390px;
+    --row1: 638px;
+    --row2: 886px;
+    --row3: 1134px;
+    --scale: 0.45;
+}
+
+body {
+    background: #010009;
+    width:  calc(1080px * var(--scale));
+    height: calc(1920px * var(--scale));
+    overflow: hidden;
+    position: relative;
+}
+
+.screen {
+    width: 1080px;
+    height: 1920px;
+    position: absolute;
+    top: 0; left: 0;
+    transform: scale(var(--scale));
+    transform-origin: top left;
+    overflow: hidden;
+    font-family: -apple-system, 'Roboto', 'Segoe UI', sans-serif;
+    color: white;
+    background:
+        radial-gradient(ellipse 860px 660px at 32% 42%, rgba(46,10,120,.55), transparent),
+        radial-gradient(ellipse 640px 520px at 72% 62%, rgba(95,10,85,.42), transparent),
+        linear-gradient(165deg, #0f0435 0%, #150960 20%, #0d0328 55%, #08021c 100%);
+}
+
+/* Star field */
+.screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(1.5px 1.5px at  7%  4%, rgba(255,255,255,.85), transparent),
+        radial-gradient(1px   1px   at 14% 11%, rgba(255,255,255,.55), transparent),
+        radial-gradient(2px   2px   at 21%  7%, rgba(255,255,255,.65), transparent),
+        radial-gradient(1px   1px   at 29%  3%, rgba(255,255,255,.75), transparent),
+        radial-gradient(1.5px 1.5px at 37% 17%, rgba(255,255,255,.50), transparent),
+        radial-gradient(1px   1px   at 44%  8%, rgba(255,255,255,.65), transparent),
+        radial-gradient(2px   2px   at 52%  4%, rgba(255,255,255,.40), transparent),
+        radial-gradient(1px   1px   at 60% 14%, rgba(255,255,255,.75), transparent),
+        radial-gradient(1px   1px   at 68%  8%, rgba(255,255,255,.55), transparent),
+        radial-gradient(2px   2px   at 76% 19%, rgba(255,255,255,.65), transparent),
+        radial-gradient(1px   1px   at 83% 11%, rgba(255,255,255,.40), transparent),
+        radial-gradient(1.5px 1.5px at 91%  6%, rgba(255,255,255,.85), transparent),
+        radial-gradient(1px   1px   at 96% 16%, rgba(255,255,255,.55), transparent),
+        radial-gradient(1px   1px   at  4% 27%, rgba(255,255,255,.60), transparent),
+        radial-gradient(2px   2px   at 12% 34%, rgba(255,255,255,.40), transparent),
+        radial-gradient(1px   1px   at 18% 41%, rgba(255,255,255,.70), transparent),
+        radial-gradient(1.5px 1.5px at 26% 29%, rgba(255,255,255,.55), transparent),
+        radial-gradient(1px   1px   at 34% 37%, rgba(255,255,255,.65), transparent),
+        radial-gradient(1px   1px   at 43% 24%, rgba(255,255,255,.40), transparent),
+        radial-gradient(2px   2px   at 51% 31%, rgba(255,255,255,.85), transparent),
+        radial-gradient(1px   1px   at 58% 44%, rgba(255,255,255,.55), transparent),
+        radial-gradient(1px   1px   at 66% 27%, rgba(255,255,255,.65), transparent),
+        radial-gradient(1.5px 1.5px at 74% 39%, rgba(255,255,255,.40), transparent),
+        radial-gradient(1px   1px   at 81% 32%, rgba(255,255,255,.75), transparent),
+        radial-gradient(2px   2px   at 89% 46%, rgba(255,255,255,.55), transparent),
+        radial-gradient(1px   1px   at 94% 38%, rgba(255,255,255,.65), transparent),
+        radial-gradient(1px   1px   at  6% 54%, rgba(255,255,255,.40), transparent),
+        radial-gradient(2px   2px   at 15% 61%, rgba(255,255,255,.75), transparent),
+        radial-gradient(1px   1px   at 23% 57%, rgba(255,255,255,.55), transparent),
+        radial-gradient(1.5px 1.5px at 31% 69%, rgba(255,255,255,.65), transparent),
+        radial-gradient(1px   1px   at 40% 64%, rgba(255,255,255,.40), transparent),
+        radial-gradient(2px   2px   at 48% 71%, rgba(255,255,255,.85), transparent),
+        radial-gradient(1px   1px   at 56% 59%, rgba(255,255,255,.55), transparent),
+        radial-gradient(1px   1px   at 63% 77%, rgba(255,255,255,.65), transparent),
+        radial-gradient(1.5px 1.5px at 71% 67%, rgba(255,255,255,.40), transparent),
+        radial-gradient(1px   1px   at 78% 74%, rgba(255,255,255,.75), transparent),
+        radial-gradient(1px   1px   at 86% 61%, rgba(255,255,255,.55), transparent),
+        radial-gradient(2px   2px   at 93% 70%, rgba(255,255,255,.65), transparent),
+        radial-gradient(1px   1px   at  3% 81%, rgba(255,255,255,.40), transparent),
+        radial-gradient(1.5px 1.5px at 11% 88%, rgba(255,255,255,.70), transparent),
+        radial-gradient(1px   1px   at 20% 94%, rgba(255,255,255,.55), transparent),
+        radial-gradient(2px   2px   at 28% 84%, rgba(255,255,255,.65), transparent),
+        radial-gradient(1px   1px   at 37% 91%, rgba(255,255,255,.40), transparent),
+        radial-gradient(1px   1px   at 46% 79%, rgba(255,255,255,.85), transparent),
+        radial-gradient(1.5px 1.5px at 55% 89%, rgba(255,255,255,.55), transparent),
+        radial-gradient(1px   1px   at 62% 82%, rgba(255,255,255,.65), transparent),
+        radial-gradient(2px   2px   at 70% 92%, rgba(255,255,255,.40), transparent),
+        radial-gradient(1px   1px   at 79% 86%, rgba(255,255,255,.75), transparent),
+        radial-gradient(1px   1px   at 88% 79%, rgba(255,255,255,.55), transparent),
+        radial-gradient(1.5px 1.5px at 95% 91%, rgba(255,255,255,.65), transparent);
+}
+
+/* Nebula blobs */
+.neb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(90px);
+}
+.n1 { width: 540px; height: 420px; top: 160px;  left: -120px; background: rgba(70,15,160,.24); }
+.n2 { width: 620px; height: 520px; top: 680px;  left: 260px;  background: rgba(140,15,100,.18); }
+.n3 { width: 440px; height: 380px; top: 1380px; right: -60px; background: rgba(55,10,140,.20); }
+
+/* Status bar */
+.sbar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 44px 0;
+    z-index: 20;
+}
+.sbar-time { font-size: 28px; font-weight: 600; letter-spacing: .5px; }
+.sbar-r    { display: flex; align-items: center; gap: 12px; }
+.sbar-bat  { font-size: 25px; font-weight: 700; }
+
+/* Nav bar */
+.appbar {
+    position: absolute;
+    top: 72px; left: 0; right: 0;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 36px;
+    z-index: 20;
+}
+.appbar-title {
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,.90);
+}
+.ico-btn {
+    background: none; border: none; cursor: pointer;
+    color: white; display: flex;
+    align-items: center; justify-content: center; padding: 8px;
+}
+
+/* Base card */
+.card {
+    width: var(--cw);
+    height: var(--ch);
+    background: #0a0718;
+    border-radius: 14px;
+    border: 1.5px solid rgba(200,168,75,.28);
+    position: absolute;
+    overflow: hidden;
+    z-index: 3;
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.72),
+        inset 0 0 0 1px rgba(200,168,75,.06);
+}
+.card svg { display: block; width: 100%; height: 100%; }
+
+/* Cross glow */
+.cross-glow {
+    position: absolute;
+    width: 500px; height: 500px;
+    left: 185px;  /* 360 + 75 - 250 */
+    top:  500px;  /* 638 + 112 - 250 */
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(110,60,230,.22) 0%,
+        rgba(170,40,140,.12) 40%,
+        transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Cross positions */
+.pos-above   { left: var(--cc1); top: var(--row0); }
+
+.pos-left    { left: var(--cc0); top: var(--row1); transform: rotate(-2deg); }
+
+.pos-center  {
+    left: var(--cc1); top: var(--row1);
+    transform: scale(1.09) translateY(-8px);
+    box-shadow:
+        0 20px 56px rgba(0,0,0,.82),
+        0 0 60px rgba(130,70,255,.30),
+        inset 0 0 0 1px rgba(200,168,75,.20);
+    z-index: 6;
+}
+
+.pos-crossing {
+    /* rotated card on top of centre — swap width/height */
+    width: var(--ch); height: var(--cw);
+    left: var(--cc1);
+    top: calc(var(--row1) + (var(--ch) - var(--cw)) / 2); /* 638 + 37.5 = 675.5 */
+    transform: rotate(90deg) scale(1.04);
+    transform-origin: center center;
+    z-index: 5;
+    opacity: .88;
+}
+
+.pos-right   { left: var(--cc2); top: var(--row1); transform: rotate(2deg); }
+
+.pos-below   { left: var(--cc1); top: var(--row2); }
+
+/* Staff */
+.staff-4 { left: var(--sx); top: var(--row0); }
+.staff-3 { left: var(--sx); top: var(--row1); }
+.staff-2 { left: var(--sx); top: var(--row2); }
+.staff-1 { left: var(--sx); top: var(--row3); }
+
+/* CTA button */
+.bottom-cta {
+    position: absolute;
+    bottom: 148px;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 20;
+}
+.reveal-btn {
+    width: 700px; height: 86px;
+    border: none; border-radius: 43px;
+    background: linear-gradient(105deg, #f24e78 0%, #ff7845 100%);
+    color: white;
+    font-size: 30px; font-weight: 800; letter-spacing: 3.5px;
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(255,70,100,.38), 0 3px 10px rgba(0,0,0,.35);
+}
