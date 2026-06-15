@@ -2023,6 +2023,10 @@
   margin-bottom: 18px;
 }
 
+.del-grid--single {
+  grid-template-columns: 1fr;
+}
+
 .del-card {
   background: linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.06));
   border: 1px solid rgba(255,255,255,.16);
