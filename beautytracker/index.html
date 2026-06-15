@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="theme-color" content="#7A55FF">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/styles.css">
+  <title>BeautyTracker — Account Deletion</title>
+</head>
+
+<body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="../index.html" aria-label="Noks Home">
+      <div class="brand-badge" aria-hidden="true"><span>N</span></div>
+      <div>
+        <div class="brand-title">Noks</div>
+        <span class="brand-sub">Developer</span>
+      </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a class="pill" href="../index.html#apps">Our Apps</a>
+    </nav>
+  </div>
+</header>
+
+<main class="deletion">
+
+  <section class="del-hero">
+    <span class="del-eyebrow">BeautyTracker</span>
+    <h1>Account Deletion</h1>
+    <p class="del-lead">
+      At BeautyTracker, we respect your privacy and give you full control over your
+      personal data. Choose how you'd like to delete your account below.
+    </p>
+  </section>
+
+  <div class="del-grid">
+
+    <article class="del-card">
+      <div class="del-icon" aria-hidden="true">🗑️</div>
+      <h2>Delete in the app</h2>
+      <p>You can permanently delete your account directly from the app:</p>
+      <div class="del-path">
+        <span>Settings</span>
+        <span class="sep">→</span>
+        <span>Delete Account</span>
+      </div>
+      <p class="del-note">
+        Deleting your account will remove your BeautyTracker account and all associated
+        cloud data.
+      </p>
+    </article>
+
+    <article class="del-card">
+      <div class="del-icon" aria-hidden="true">✉️</div>
+      <h2>Request by email</h2>
+      <p>If you are unable to access the app, you can request account deletion by contacting us:</p>
+      <a class="btn btn-primary" href="mailto:noksdev@gmail.com">noksdev@gmail.com</a>
+      <p class="del-note">
+        Please include your <strong>User ID (UID)</strong> so we can identify your account.
+        You can find it in <strong>Settings → Account Information</strong>.
+      </p>
+    </article>
+
+  </div>
+
+  <section class="del-panel">
+    <h2><span class="del-mini" aria-hidden="true">📦</span> What data will be deleted</h2>
+    <ul class="del-data-list">
+      <li>Account information</li>
+      <li>Synced products and product details</li>
+      <li>Uploaded photos and media files</li>
+      <li>Associated cloud backups and stored data</li>
+    </ul>
+  </section>
+
+  <div class="del-row">
+    <section class="del-panel">
+      <h2><span class="del-mini" aria-hidden="true">⏱️</span> Data retention</h2>
+      <p>
+        Deletion requests are processed as soon as possible. All associated data is
+        permanently removed within <span class="del-30">30 days</span> of account deletion
+        or request verification.
+      </p>
+    </section>
+
+    <section class="del-panel">
+      <h2><span class="del-mini" aria-hidden="true">💳</span> Subscriptions</h2>
+      <p>
+        Deleting your account does not automatically cancel an active subscription.
+        Subscription management must be handled separately through Google Play or the App Store.
+      </p>
+    </section>
+  </div>
+
+  <section class="del-contact">
+    <h2>Questions about your data?</h2>
+    <p>If you have any questions regarding your data or privacy, we're here to help.</p>
+    <a class="btn btn-primary" href="mailto:noksdev@gmail.com">Contact us →</a>
+  </section>
+
+<footer>
+  <div class="foot">
+    <div class="small">© <span id="year"></span> Noks. All rights reserved.</div>
+    <div class="small" style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#apps">Our apps</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../terms.html">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
