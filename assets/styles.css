@@ -410,6 +410,107 @@
     background: rgba(0,0,0,.10);
     color: rgba(255,255,255,.85);
   }
+  /* horizontal "Coming soon" pill in the card's top-right corner */
+  .soon-ribbon{
+    position:absolute;
+    top:16px;
+    right:16px;
+    z-index:3;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 12px;
+    border-radius:999px;
+    line-height:1;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:#fff;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.4);
+    box-shadow:0 6px 16px rgba(0,0,0,.25);
+    /* animated rainbow fill that matches the icon ring */
+    background: linear-gradient(100deg,
+      #9b6dff, #c084fc, #5ce1e6, #ff7eb3, #9b6dff);
+    background-size:240% 100%;
+    animation: soon-shift 4s linear infinite;
+  }
+  /* running sheen sweeping across the ribbon */
+  .soon-ribbon::after{
+    content:'';
+    position:absolute;
+    top:0; left:-60%;
+    width:40%; height:100%;
+    background: linear-gradient(100deg,
+      transparent, rgba(255,255,255,.65), transparent);
+    transform: skewX(-20deg);
+    animation: soon-sheen 3.2s ease-in-out infinite;
+  }
+  @keyframes soon-shift {
+    to { background-position: 240% 0; }
+  }
+  @keyframes soon-sheen {
+    0%   { left:-60%; }
+    60%,100% { left:140%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .soon-ribbon { animation: none; }
+    .soon-ribbon::after { display: none; }
+  }
+
+  /* --- BeautyVault "coming soon" icon effects --- */
+  /* wrapper so the glow can live OUTSIDE the clipped icon */
+  .icon-soon-wrap {
+    position: relative;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+  }
+  /* rotating conic gradient ring that wraps the icon */
+  .icon-soon-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 22px;
+    background: conic-gradient(from 0deg,
+      #ff9 ,#c084fc, #9b6dff, #5ce1e6, #ff7eb3, #c084fc, #ff9);
+    filter: blur(7px);
+    opacity: .85;
+    z-index: -1;
+    animation: ring-spin 4s linear infinite;
+  }
+  @keyframes ring-spin {
+    to { transform: rotate(360deg); }
+  }
+  .icon-soon-wrap .app-icon {
+    /* lift the icon above the glow and keep it crisp */
+    z-index: 1;
+  }
+
+  /* floating sparkles drifting around the icon */
+  .icon-soon-wrap .spark {
+    position: absolute;
+    font-size: 13px;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 2;
+    filter: drop-shadow(0 0 4px rgba(192,132,252,.9));
+    animation: spark-float 3s ease-in-out infinite;
+  }
+  .icon-soon-wrap .spark.s1 { top: -10px; right: -6px; animation-delay: 0s;   }
+  .icon-soon-wrap .spark.s2 { bottom: -8px; left: -8px; animation-delay: .9s; font-size: 10px; }
+  .icon-soon-wrap .spark.s3 { top: 40%; right: -12px;   animation-delay: 1.7s; font-size: 11px; }
+  @keyframes spark-float {
+    0%, 100% { transform: translateY(0) scale(1);   opacity: .35; }
+    50%      { transform: translateY(-6px) scale(1.35); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .icon-soon-wrap::before,
+    .icon-soon-wrap .spark { animation: none; }
+  }
   .app-desc{
     margin:0 0 10px;
     color:var(--muted);
