@@ -217,7 +217,7 @@ function initReviewsCarousel() {
   if (!track) return;
 
   const cards = [...track.querySelectorAll('.r-card')];
-  const dots  = [...document.querySelectorAll('.carousel-dots-row .cdot')];
+  const dots  = [...document.querySelectorAll('.carousel-dots-row:not(.hero-dots) .cdot')];
   const total = cards.length;
   let active = 0;
   let timer  = null;
@@ -307,3 +307,42 @@ function initReviewsCarousel() {
 }
 
 initReviewsCarousel();
+
+// Hero: the studio slide and the new game banner take turns (not while the tab is hidden).
+// The dots under the hero show which one is on and switch on a tap.
+(function heroSlides() {
+  var root = document.querySelector(".hero-slides");
+  if (!root) return;
+  var slides = root.querySelectorAll(":scope > .hero-copy, :scope > .hero-game");
+  if (slides.length < 2) return;
+  var dots = document.querySelectorAll(".hero-dots .cdot");
+  var current = 0, timer = null;
+  root.classList.add("is-rotating");
+  function show(i) {
+    slides.forEach(function (s, k) {
+      var on = k === i;
+      s.classList.toggle("is-active", on);
+      if (on) s.removeAttribute("aria-hidden"); else s.setAttribute("aria-hidden", "true");
+      s.querySelectorAll("a").forEach(function (a) { if (on) a.removeAttribute("tabindex"); else a.tabIndex = -1; });
+    });
+    dots.forEach(function (d, k) {
+      d.classList.remove("cdot-active");
+      void d.offsetWidth; // restart the fill
+      if (k === i) d.classList.add("cdot-active");
+      d.setAttribute("aria-selected", k === i ? "true" : "false");
+    });
+    current = i;
+  }
+  function start() {
+    clearInterval(timer);
+    timer = setInterval(function () {
+      if (document.hidden) return;
+      show((current + 1) % slides.length);
+    }, 6000);
+  }
+  dots.forEach(function (d, k) {
+    d.addEventListener("click", function () { show(k); start(); });
+  });
+  show(0);
+  start();
+})();
