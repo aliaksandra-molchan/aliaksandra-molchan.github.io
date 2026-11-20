@@ -35,7 +35,7 @@
 
   <h1>Terms of Service</h1>
 
-  <p>Last Updated: 2026-06-15</p>
+  <p>Last Updated: 2026-11-20</p>
 
   <h2>1. Acceptance of Terms</h2>
 
@@ -208,9 +208,13 @@
     reasonably necessary for backup, legal, security, fraud-prevention, or operational purposes.
   </p>
 
-  <h2>9. Subscription Services</h2>
+  <h2>9. Purchases and Subscriptions</h2>
 
-  <p>Certain features of the Services may require payment of subscription fees.</p>
+  <p>
+    Certain features of the Services may require payment of subscription fees or one-time
+    in-app purchases. All payments are processed by the applicable app store or payment
+    provider.
+  </p>
 
   <p>
     Subscriptions may automatically renew unless cancelled in accordance with the policies of
@@ -938,6 +942,104 @@
     </div>
   </details>
 
+  <details class="app-terms-card" id="sew-to-runway">
+    <summary>Additional Terms for Sew to Runway: Fashion Tycoon</summary>
+    <div class="app-terms-body">
+
+      <p>
+        These Additional Terms for Sew to Runway: Fashion Tycoon ("Game Terms") supplement the
+        Noks Development Terms of Service and apply exclusively to users of the Sew to Runway:
+        Fashion Tycoon game ("the Game"). In the event of any conflict, these Game Terms prevail
+        solely with respect to the Game.
+      </p>
+
+      <h3>22. Virtual Items and Currency</h3>
+
+      <p>
+        The Game contains virtual items, such as crystals, outfits, boosts and in-game money
+        ("Virtual Items"). Virtual Items are licensed to you for use in the Game only; you do not
+        own them. Virtual Items have no real-world monetary value and cannot be exchanged for
+        money, transferred, sold or traded.
+      </p>
+
+      <p>
+        We may change the prices, availability, effects and amounts of Virtual Items and rewards,
+        for example to balance the Game.
+      </p>
+
+      <h3>23. In-App Purchases</h3>
+
+      <p>
+        Purchases are made through Google Play and are subject to its terms and refund policies.
+        A purchase is delivered once the store has confirmed it. Non-consumable purchases (such as
+        "No Ads" or exclusive outfits) can be restored with "Restore purchases" in the Game;
+        consumable items (such as crystals) cannot be restored once used.
+      </p>
+
+      <h3>24. Rewarded Ads, Events and Rewards</h3>
+
+      <p>
+        Some rewards are given for watching an optional video advertisement; a reward is granted
+        only after the video is watched to the end and is subject to daily limits. Events, daily
+        rewards, weekly offers and their prizes may change or end at any time.
+      </p>
+
+      <h3>25. Game Data</h3>
+
+      <p>
+        The Game does not require an account. Your progress is stored on your device and may be
+        lost if the Game is uninstalled or its data is cleared. We are not able to restore lost
+        progress, except for purchases that can be restored as described above.
+      </p>
+
+      <h3>26. Fair Play</h3>
+
+      <p>
+        You agree not to use cheats, modified versions of the Game, automation, changes to the
+        device clock or any other method to obtain Virtual Items or progress in a way not
+        intended by the Game. We may remove Virtual Items or rewards obtained this way.
+      </p>
+
+      <h3>27. Fictional Content</h3>
+
+      <p>
+        The story, characters, fashion houses, brands and publications in the Game are fictional.
+        Any resemblance to real persons or companies is coincidental.
+      </p>
+
+      <h3 id="sew-to-runway-preregistration">28. Pre-registration Reward</h3>
+
+      <p>
+        Users who pre-register for the Game on Google Play during the pre-registration period, in
+        the regions where it is offered, are eligible for a one-time reward: the exclusive
+        "Early Bird" outfit and 25 crystals.
+      </p>
+
+      <ul>
+        <li>
+          To receive the reward, install the Game from Google Play using the same Google account
+          that was used to pre-register. The reward is delivered automatically when the Game is
+          first opened with an internet connection.
+        </li>
+        <li>The reward is limited to one per Google account.</li>
+        <li>
+          The reward is a Virtual Item under section 22: it has no cash value and cannot be
+          transferred, exchanged or sold.
+        </li>
+        <li>
+          If game data is lost, the outfit can be restored with "Restore purchases"; crystals that
+          were already spent are not returned.
+        </li>
+        <li>
+          Eligibility and delivery of the reward depend on Google Play. We may withhold or remove
+          the reward in case of fraud or abuse, and may change or end the offer before the Game
+          is released.
+        </li>
+      </ul>
+
+    </div>
+  </details>
+
 <footer>
   <div class="foot">
     <div class="small">© <span id="year"></span> Noks. All rights reserved.</div>
@@ -951,5 +1053,18 @@
 </footer>
 </main>
 
+<script>
+  // A link to a section inside a collapsed app card (e.g. #sew-to-runway-preregistration) opens the card first.
+  function openTarget() {
+    var id = location.hash.slice(1);
+    var el = id && document.getElementById(id);
+    if (!el) return;
+    var card = el.closest('details');
+    if (card) card.open = true;
+    el.scrollIntoView();
+  }
+  window.addEventListener('hashchange', openTarget);
+  window.addEventListener('DOMContentLoaded', openTarget);
+</script>
 </body>
 </html>

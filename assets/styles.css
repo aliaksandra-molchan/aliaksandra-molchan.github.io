@@ -2316,3 +2316,127 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* =============================================
+   HERO SLIDES: the studio hero and the new game banner take turns
+   (assets/main.js → heroSlides). Both sit in one grid cell, so the
+   card keeps the height of the taller one and nothing jumps.
+   ============================================= */
+.hero-slides {
+  display: grid;
+}
+
+.hero-slides > .hero-copy,
+.hero-slides > .hero-game {
+  grid-area: 1 / 1;
+  transition: opacity .9s ease, visibility .9s;
+}
+
+/* Without the script only the studio hero shows, as before. */
+.hero-game {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.hero-slides.is-rotating > .hero-copy,
+.hero-slides.is-rotating > .hero-game {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.hero-slides.is-rotating > .is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* The game banner: the key art fills the card, the text sits on the left over a soft shade. */
+.hero-game {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 360px;
+  padding: 38px 34px 34px;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.hero-game-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 30%;
+  transform: scale(1.04);
+  transition: transform 7s ease-out;
+}
+
+.hero-slides.is-rotating > .hero-game.is-active .hero-game-bg {
+  transform: scale(1);
+}
+
+.hero-game::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(120,30,80,.78) 0%,
+    rgba(150,50,110,.55) 32%,
+    rgba(150,50,110,0) 58%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-game-text {
+  position: relative;
+  z-index: 2;
+  max-width: 440px;
+  text-shadow: 0 2px 14px rgba(60,10,40,.35);
+}
+
+.hero-game-title {
+  margin: 14px 0 10px;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.05;
+  letter-spacing: .2px;
+}
+
+.hero-game .lead { color: rgba(255,255,255,.9); }
+
+@media (max-width: 860px) {
+  .hero-game {
+    align-items: flex-end;
+    min-height: 460px;
+    padding: 30px 22px 22px;
+  }
+  .hero-game-bg { object-position: 50% 20%; }
+  .hero-game::before {
+    background: linear-gradient(0deg,
+      rgba(120,30,80,.85) 0%,
+      rgba(150,50,110,.55) 45%,
+      rgba(150,50,110,0) 70%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slides > .hero-copy,
+  .hero-slides > .hero-game,
+  .hero-game-bg { transition: none !important; transform: none !important; }
+}
+
+/* Hero slide dots: the same pills as the reviews carousel, under the hero card. */
+.carousel-dots-row.hero-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  margin: 0;
+  z-index: 3;
+}
+.hero-dots .cdot.cdot-active::after {
+  animation-duration: 6000ms;
+}
+/* Room for the dots at the bottom of the hero card. */
+.hero-slides > .hero-copy.hero-grid,
+.hero-slides > .hero-game { padding-bottom: 52px; }
